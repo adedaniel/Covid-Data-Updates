@@ -4,6 +4,7 @@ import { colors } from "./styles/styles";
 // import { DefaultButton, OutlineButton } from "./button";
 // import LogoImage from "./ImageExports/LogoImage";
 /* eslint jsx-a11y/anchor-is-valid: 0 */
+import Link from 'next/link'
 function Header({ siteTitle }) {
   const [active, setActive] = useState(1)
   const [topClass, setTopClass] = useState("");
@@ -46,18 +47,22 @@ function Header({ siteTitle }) {
               }`} onClick={() => {
                 setActive(1)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#home">
-                Home
+              <Link href='/'>
+                <a className="nav-link js-scroll-trigger">
+                  Home
           </a>
+              </Link>
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 2 ? "active" : "inactive"
               }`} onClick={() => {
                 setActive(2)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#ncdc">
-                NCDC
+              <Link href='/ncdc'>
+                <a className="nav-link js-scroll-trigger" >
+                  NCDC
         </a>
+              </Link>
             </li>
 
             <li className={`nav-item mx3 sidebarList ${
@@ -65,36 +70,44 @@ function Header({ siteTitle }) {
               }`} onClick={() => {
                 setActive(3)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#international">
-                International
+              <Link href="/international">
+                <a className="nav-link js-scroll-trigger" >
+                  International
               </a>
+              </Link>
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 4 ? "active" : "inactive"
               }`} onClick={() => {
                 setActive(4)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#news">
-                News
+              <Link href="/news">
+                <a className="nav-link js-scroll-trigger" >
+                  News
               </a>
+              </Link>
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 5 ? "active" : "inactive"
               }`} onClick={() => {
                 setActive(5)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#contact">
-                FAQs
+              <Link href="/faq">
+                <a className="nav-link js-scroll-trigger" >
+                  FAQs
             </a>
+              </Link>
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 6 ? "active" : "inactive"
               }`} onClick={() => {
                 setActive(6)
               }}>
-              <a className="nav-link js-scroll-trigger" href="#contact">
-                Contact
+              <Link href="/contact">
+                <a className="nav-link js-scroll-trigger" >
+                  Contact
             </a>
+              </Link>
             </li>
           </ul>
         </div>
