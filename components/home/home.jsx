@@ -163,7 +163,7 @@ export default function Home() {
           border-left-width: 1px;
           border-left-color: ${colors.lightgrey};
           border-left-style: solid;
-          border-top-width: 5px;
+          border-top-width: 1px;
           border-top-color: ${colors.lightgrey};
           border-top-style: solid;
         }

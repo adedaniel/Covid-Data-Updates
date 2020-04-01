@@ -25,7 +25,7 @@ export default function FixedNews() {
       </h4>
       <div className='vh90'>
         {news.slice(0, 5).map(eachNews => (
-          <a target='_blank' rel="noopener noreferrer" key={eachNews.id} href={eachNews.link} className='text-dark text-decoration-none'>
+          <a target='_blank' rel="noopener noreferrer" key={eachNews.title} href={eachNews.link} className='text-dark text-decoration-none'>
             <div className="bg-white newsCard py-2 px-2 my-2">
               <h5 className='m-0'>{eachNews.title}</h5>
               <small className='m-0 textGrey'>{eachNews.published}</small>
