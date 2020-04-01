@@ -1,3 +1,4 @@
+import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
@@ -15,6 +16,12 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <style jsx global>
+            {`
+         
+          
+          `}
+          </style>
         </body>
       </Html>
     )

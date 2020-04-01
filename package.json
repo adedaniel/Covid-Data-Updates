@@ -9,10 +9,19 @@
     "export": "cross-env NEXT_EXPORT=true next build && cross-env NEXT_EXPORT=true next export"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "canary",
     "next-offline": "4.0.6",
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-content-loader": "^5.0.2",
+    "react-dom": "16.12.0",
+    "react-fade-in": "^0.1.8",
+    "react-filter-search": "^1.0.11",
+    "react-lazyload": "^2.6.7",
+    "react-list-lazy-load": "^1.1.1",
+    "react-zoom-pan-pinch": "^1.6.1"
   },
   "devDependencies": {
     "cross-env": "6.0.3"
