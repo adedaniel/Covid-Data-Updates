@@ -13,7 +13,7 @@
     "bootstrap": "^4.4.1",
     "isomorphic-unfetch": "^3.0.0",
     "next": "canary",
-    "next-offline": "4.0.6",
+    "next-offline": "^5.0.0",
     "react": "16.12.0",
     "react-content-loader": "^5.0.2",
     "react-dom": "16.12.0",
