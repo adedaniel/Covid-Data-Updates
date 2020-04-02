@@ -23,6 +23,7 @@ import FixedNews from "./FixedNews";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import TopCasesLocal from "./TopCasesLocal";
+import TopCasesInternational from "./TopCasesInternational";
 
 export default function Home() {
   return (
@@ -98,7 +99,7 @@ export default function Home() {
                     <div className='imageBorder'>
                       <TransformComponent>
                         <div className="wordcloud">
-                          <img width='100%' height='100%' src="http://coronadatasource.herokuapp.com/static/corona.png" alt="" />
+                          <img width='100%' height='100%' src="https://coronadatasource.herokuapp.com/static/corona.png" alt="" />
                         </div>
                       </TransformComponent>
                     </div>
@@ -113,24 +114,27 @@ export default function Home() {
 
         <div className="py-4 bgLight">
           <div className="container">
-            <h1 className="colorPrimary">Top Cases</h1>
-            <h3 className='mt-3'>Nigeria</h3>
-            <div className=" mt-2">
-              <div className="container">
-                <div className="row">
-                  <TopCasesLocal />
-                  <TopCasesLocal />
-                  <TopCasesLocal />
-                  <TopCasesLocal />
-                  <TopCasesLocal />
-                  <TopCasesLocal />
+            <h1 className="colorPrimary mt-4">Top Cases in Nigeria</h1>
+            <div className=" mt-4">
+              <div className="row">
+                <TopCasesLocal />
 
-                </div>
+
               </div>
             </div>
 
+            <h1 className="colorPrimary mt-4">Top Cases around the World</h1>
+            <div className=" mt-4">
+              <div className="row">
+                <TopCasesInternational />
+
+
+              </div>
+            </div>
           </div>
+
         </div>
+
 
       </div>
       <div className="fixed-news leftBorder py-4 px-3">

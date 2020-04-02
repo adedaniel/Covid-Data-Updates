@@ -4,60 +4,69 @@ import Head from "next/head";
 import React from "react";
 import Axios from "axios";
 // import { Provider } from "../components/Context";
-
-// import { URL } from "../components/url";
+import { Provider } from "../components/Context";
+import { URL } from "../components/url";
 
 export default class MyApp extends App {
   state = {
-    showTab: true,
-    firstLoad: true,
-    students: [],
-    subjects: [],
-    classes: []
+
+    news: [],
+    localNews: [],
+    ncdc: {},
+    summary: [],
+    timeSeries: [],
   };
-  // componentDidMount() {
-  //   const requeststudents = Axios.get(URL + "/getstudents");
-  //   const requestsubjects = Axios.get(URL + "/getsubjects");
-  //   const requestclasses = Axios.get(URL + "/getclasses");
+  componentDidMount() {
+    Axios.get(
+      URL + "/ncdc"
+    ).then((result) => {
+      this.setState({ ncdc: JSON.parse(result.data.data) })
+      // console.log(result.data.data);
+      // console.log("fetched");
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
+    Axios.get(
+      URL + "/news"
+    ).then((result) => {
+      this.setState({ news: result.data.data })
+      // console.log(result.data.data);
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
+    Axios.get(
+      URL + "/localnews"
+    ).then((result) => {
+      this.setState({ localNews: result.data.data })
+      // console.log(result.data.data);
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
 
-  //   Axios.all([requeststudents, requestsubjects, requestclasses])
-  //     .then(
-  //       Axios.spread((...responses) => {
-  //         const responsestudents = responses[0].data.data.students;
-  //         const responsesubjects = responses[1].data.data.subjects;
-  //         const responseclasses = responses[2].data.data.classes;
+    Axios.get(
+      URL + "/summary"
+    ).then((result) => {
+      this.setState({ summary: result.data.data })
+      // console.log(result.data.data);
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
 
-  //         // use/access the results
-  //         this.setState({
-  //           students: responsestudents,
-  //           subjects: responsesubjects,
-  //           classes: responseclasses
-  //         });
-  //       })
-  //     )
-  //     .catch(errors => {
-  //       // react on errors.
-  //       console.error(errors);
-  //     });
-  // }
+    Axios.get(
+      URL + "/timeseries"
+    ).then((result) => {
+      this.setState({ timeSeries: result.data.data })
+      // console.log(result.data.data);
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
 
-  // setShowTab = () => {
-  //   this.setState({ showTab: !this.state.showTab });
-  // };
-  // addStudent = details => {
-  //   this.setState({
-  //     students: [...this.state.students, details]
-  //   });
-  // };
-
-  // addSubject = details => {
-  //   let newSubject = {
-  //     subject_name: details.subject
-  //   };
-  //   this.setState({
-  //     subjects: [...this.state.subjects, newSubject]
-  //   });
-  // };
+  }
 
   render() {
     const { Component, pageProps } = this.props;
@@ -84,15 +93,23 @@ export default class MyApp extends App {
           <title>Covid Tracker</title>
         </Head>
 
+        <Provider
+          value={{
+            news: this.state.news,
+            summary: this.state.summary,
+            localNews: this.state.localNews,
+            ncdc: this.state.ncdc,
+            timeSeries: this.state.timeSeries,
+          }}
+        >
 
-        <div className="w-100 appWrapper position-absolute bgLight">
           <Component {...pageProps} />
-        </div>
+        </Provider>
         <style jsx global>{`
           @font-face {
             font-family: Jaldi;
             src: url(fonts/Jaldi-Regular.ttf);
-            font-display: fallback;
+            font-display: swap;
           }
           html {
             font-family: "Jaldi", sans-serif;
