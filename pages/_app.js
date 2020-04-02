@@ -119,8 +119,8 @@ export default class MyApp extends App {
           
           body {
             font-family: Jaldi;
-            font-size: 20px
-
+            font-size: 20px;
+            
           }
          
         
