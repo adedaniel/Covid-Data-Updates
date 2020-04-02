@@ -3,7 +3,7 @@ import Layout from '../components/layout'
 import FAQS from '../components/FAQ'
 export default function FAQ() {
   return (
-    <Layout>
+    <Layout active={5}>
       <FAQS />
     </Layout>
   )

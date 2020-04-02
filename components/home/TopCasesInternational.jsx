@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../styles/styles'
 import MyContext from "../Context";
 
 
 export default function TopCasesInternational() {
-    const [casesArray, setCasesArray] = useState([])
     const { summary } = useContext(MyContext);
     // console.log(summary);
 

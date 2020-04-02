@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { colors } from '../styles/styles'
 import Link from "next/link"
-import Axios from 'axios'
+import MyContext from "../Context";
 export default function FixedNews() {
+  const { news } = useContext(MyContext);
+  // const [news, setNews] = useState([])
+  // useEffect(() => {
+  //   Axios.get(
+  //     `https://coronadatasource.herokuapp.com/api/news`
+  //   ).then((result) => {
 
-  const [news, setNews] = useState([])
-  useEffect(() => {
-    Axios.get(
-      `https://coronadatasource.herokuapp.com/api/news`
-    ).then((result) => {
-
-      // console.log(result.data.data);
-      setNews(result.data.data)
-    })
-  }, [])
-
+  //     // console.log(result.data.data);
+  //     setNews(result.data.data)
+  //   })
+  // }, [])
   return (
     <div>
       <h4 className="mb-3">
@@ -24,13 +23,14 @@ export default function FixedNews() {
        </span>
       </h4>
       <div className='vh90'>
-        {news.slice(0, 5).map(eachNews => (
+        {news.slice(0, 5).map((eachNews) => (
           <a target='_blank' rel="noopener noreferrer" key={eachNews.title} href={eachNews.link} className='text-dark text-decoration-none'>
             <div className="bg-white newsCard py-2 px-2 my-2">
               <h5 className='m-0'>{eachNews.title}</h5>
               <small className='m-0 textGrey'>{eachNews.published}</small>
               <h6>
                 {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
+
                 <span className='newsLink text-decoration-none'>Read More</span>
               </h6>
 

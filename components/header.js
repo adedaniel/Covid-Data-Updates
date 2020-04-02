@@ -5,8 +5,8 @@ import { colors } from "./styles/styles";
 // import LogoImage from "./ImageExports/LogoImage";
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 import Link from 'next/link'
-function Header({ siteTitle }) {
-  const [active, setActive] = useState(1)
+function Header({ siteTitle, active }) {
+  // const [active, setActive] = useState(1)
   const [topClass, setTopClass] = useState("");
 
   useEffect(() => {
@@ -44,9 +44,7 @@ function Header({ siteTitle }) {
           <ul className="navbar-nav ml-auto navbar-right">
             <li className={`nav-item mx3 sidebarList ${
               active === 1 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(1)
-              }}>
+              }`} >
               <Link href='/'>
                 <a className="nav-link js-scroll-trigger">
                   Home
@@ -55,9 +53,7 @@ function Header({ siteTitle }) {
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 2 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(2)
-              }}>
+              }`} >
               <Link href='/ncdc'>
                 <a className="nav-link js-scroll-trigger" >
                   NCDC
@@ -67,9 +63,7 @@ function Header({ siteTitle }) {
 
             <li className={`nav-item mx3 sidebarList ${
               active === 3 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(3)
-              }}>
+              }`}>
               <Link href="/international">
                 <a className="nav-link js-scroll-trigger" >
                   International
@@ -78,9 +72,7 @@ function Header({ siteTitle }) {
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 4 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(4)
-              }}>
+              }`} >
               <Link href="/news">
                 <a className="nav-link js-scroll-trigger" >
                   News
@@ -89,9 +81,7 @@ function Header({ siteTitle }) {
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 5 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(5)
-              }}>
+              }`} >
               <Link href="/faq">
                 <a className="nav-link js-scroll-trigger" >
                   FAQs
@@ -100,9 +90,7 @@ function Header({ siteTitle }) {
             </li>
             <li className={`nav-item mx3 sidebarList ${
               active === 6 ? "active" : "inactive"
-              }`} onClick={() => {
-                setActive(6)
-              }}>
+              }`} >
               <Link href="/contact">
                 <a className="nav-link js-scroll-trigger" >
                   Contact

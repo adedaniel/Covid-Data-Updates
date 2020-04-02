@@ -5,11 +5,11 @@ import Header from "./header"
 import { colors } from "./styles/styles";
 const config = require("../data/config")
 
-const Layout = ({ children }) => {
+const Layout = ({ children, active }) => {
 
   return (
     <>
-      <Header siteTitle={config.defaultTitle} />
+      <Header siteTitle={config.defaultTitle} active={active} />
       <div
         style={{
           marginTop: 60,
@@ -39,6 +39,7 @@ const Layout = ({ children }) => {
       ::-webkit-scrollbar-thumb:hover {
         background: ${colors.grey};
       }
+      
       `}</style>
     </>
   )
