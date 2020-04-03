@@ -24,6 +24,7 @@ import FixedNews from "./FixedNews";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import TopCasesLocal from "./TopCasesLocal";
 import TopCasesInternational from "./TopCasesInternational";
+// import WordCloud from "./WordCloud";
 
 export default function Home() {
   return (
@@ -99,7 +100,7 @@ export default function Home() {
                     <div className='imageBorder'>
                       <TransformComponent>
                         <div className="wordcloud">
-                          <img width='100%' height='100%' src="https://coronadatasource.herokuapp.com/static/corona.png" alt="" />
+                          <img width='100%' height='100%' src="http://coronadatasource.herokuapp.com/static/corona.png" alt="wordcloud" />
                         </div>
                       </TransformComponent>
                     </div>

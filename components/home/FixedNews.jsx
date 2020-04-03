@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../styles/styles'
 import Link from "next/link"
 import MyContext from "../Context";

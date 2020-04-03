@@ -10,14 +10,21 @@ function Header({ siteTitle, active }) {
   const [topClass, setTopClass] = useState("");
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const event = () => {
       let activeClass = "past-main";
       if (window.scrollY === 0) {
         activeClass = "";
       }
       setTopClass(activeClass);
-    });
+    }
+
+    window.addEventListener("scroll", event);
+    return () => {
+      window.removeEventListener("scroll", event);
+    };
   }, []);
+
+
 
   return (
     <nav
@@ -64,9 +71,9 @@ function Header({ siteTitle, active }) {
             <li className={`nav-item mx3 sidebarList ${
               active === 3 ? "active" : "inactive"
               }`}>
-              <Link href="/international">
+              <Link href="/infographics">
                 <a className="nav-link js-scroll-trigger" >
-                  International
+                  Infographics
               </a>
               </Link>
             </li>

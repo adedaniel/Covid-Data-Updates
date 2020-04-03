@@ -23,8 +23,8 @@ export default function News() {
                 </h1>
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a className="nav-item nav-link active" id="nav-local-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="true"><strong>LOCAL</strong></a>
-                        <a className="nav-item nav-link" id="nav-international-tab" data-toggle="tab" href="#nav-international" role="tab" aria-controls="nav-international" aria-selected="false"><strong>INTERNATIONAL</strong></a>
+                        <a className="nav-item nav-link active" id="nav-local-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="true">LOCAL</a>
+                        <a className="nav-item nav-link" id="nav-international-tab" data-toggle="tab" href="#nav-international" role="tab" aria-controls="nav-international" aria-selected="false">INTERNATIONAL</a>
                     </div>
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
