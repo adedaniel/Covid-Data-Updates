@@ -102,7 +102,7 @@ export default function Footer({ siteTitle }) {
               </li>
               <li className="listItem">
                 <a href="#" className="itemLink">
-                  support@seejobs.com
+                  support@covid-tracker.com
                 </a>
               </li>
               <li className="listItem">

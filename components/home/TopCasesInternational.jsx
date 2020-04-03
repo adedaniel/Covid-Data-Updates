@@ -31,7 +31,7 @@ export default function TopCasesInternational() {
                             <span> <img src={`https://www.countryflags.io/${eachCase.flag}/flat/32.png`} /></span> <span>&nbsp;  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
                             <style jsx>{`
                   .caseNumber{
-                      font-size: 3.9rem
+                      font-size: 3.0rem
                     }
                     .topCase{
                       background-color: ${colors.white};
