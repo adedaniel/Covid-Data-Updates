@@ -15,7 +15,8 @@ export default class MyApp extends App {
     ncdc: {},
     summary: [],
     timeSeries: {},
-    wordCloud: ""
+    wordCloud: "",
+    all: {}
   };
   componentDidMount() {
     Axios.get(
@@ -66,6 +67,15 @@ export default class MyApp extends App {
       // react on errors.
       console.error(errors);
     });
+    Axios.get(
+      URL + "/all"
+    ).then((result) => {
+      this.setState({ all: result.data.data })
+      // console.log(result.data.data);
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
 
     Axios.get(
       URL + "/wordcloudimage"
@@ -111,6 +121,7 @@ export default class MyApp extends App {
             localNews: this.state.localNews,
             ncdc: this.state.ncdc,
             timeSeries: this.state.timeSeries,
+            all: this.state.all,
             wordCloud: this.state.wordCloud
           }}
         >
