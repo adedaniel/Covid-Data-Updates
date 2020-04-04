@@ -21,9 +21,13 @@ const Layout = ({ children, active }) => {
       </div>
       <style jsx global>{`
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 5px;
+        height: 8px
       }
-
+      ::-moz-scrollbar {
+        width: 5px;
+        height: 8px
+      }
       /* Track */
       ::-webkit-scrollbar-track {
         background: ${colors.offWhite};

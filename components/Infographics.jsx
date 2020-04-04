@@ -13,11 +13,11 @@ export default function Infographics() {
 
         countriesNames = Object.keys(timeSeries);
 
-
+        // console.log(summary);
         let requiredArray = []
         // console.log(((timeSeries.Nigeria.length) - 22), (timeSeries.Nigeria.length));
         // console.log(typeof ((timeSeries.Nigeria.length) - 22));
-        timeSeries[`${country}`].slice(((timeSeries.Nigeria.length) - 8), (timeSeries.Nigeria.length)).map((eachDate) => (
+        timeSeries[`${country}`].slice(((timeSeries.Nigeria.length) - 7), (timeSeries.Nigeria.length)).map((eachDate) => (
             requiredArray = [eachDate.date, eachDate.confirmed, eachDate.deaths, eachDate.recovered],
 
             // console.log(requiredArray),
@@ -53,62 +53,150 @@ export default function Infographics() {
 
                     </span>
                 </span>
+                <div className="scroll">
+                    {Object.entries(timeSeries).length !== 0 ?
 
-                {Object.entries(timeSeries).length !== 0 ?
-
-                    <Chart
-                        width={'100%'}
-                        height={'500px'}
-                        chartType="LineChart"
-                        loader={<div>Loading Chart</div>}
-                        data={nationalStates
-                        }
-                        options={{
-                            hAxis: {
-                                title: 'Days',
-                                textStyle: {
-                                    color: colors.primary,
+                        <Chart
+                            width={'1000px'}
+                            height={'500px'}
+                            chartType="LineChart"
+                            loader={<div>Loading Chart</div>}
+                            data={nationalStates
+                            }
+                            options={{
+                                hAxis: {
+                                    title: 'Dates',
+                                    textStyle: {
+                                        color: colors.primary,
+                                        fontName: 'Jaldi',
+                                        fontSize: '20'
+                                    }
+                                },
+                                titleTextStyle: {
+                                    color: colors.primary,    // any HTML string color ('red', '#cc00cc')
                                     fontName: 'Jaldi',
-                                    fontSize: '20'
-                                }
-                            },
-                            titleTextStyle: {
-                                color: colors.primary,    // any HTML string color ('red', '#cc00cc')
-                                fontName: 'Jaldi',
-                                fontSize: '20', // 12, 18 whatever you want (don't specify px)
+                                    fontSize: '20', // 12, 18 whatever you want (don't specify px)
 
-                            },
-                            pointSize: 3,
-                            animation: {
-                                startup: true,
-                                easing: 'linear',
-                                duration: 500,
-                            },
-                            vAxis: {
-                                title: 'Cases',
-                                textStyle: {
-                                    color: colors.primary,
-                                    fontName: 'Jaldi',
-                                    fontSize: '20'
-                                }
-                            },
-                            curveType: 'function',
-                            colors: ['#b3aa0e', '#e2371d', '#14a52a']
-                        }}
-                        rootProps={{ 'data-testid': '2' }}
-                    />
+                                },
+                                pointSize: 3,
+                                animation: {
+                                    startup: true,
+                                    easing: 'linear',
+                                    duration: 500,
+                                },
+                                vAxis: {
+                                    title: 'Cases',
+                                    textStyle: {
+                                        color: colors.primary,
+                                        fontName: 'Jaldi',
+                                        fontSize: '20'
+                                    }
+                                },
+                                curveType: 'function',
+                                colors: ['#b3aa0e', '#e2371d', '#14a52a']
+                            }}
+                            rootProps={{ 'data-testid': '2' }}
+                        />
 
-                    : ""}
+                        : ""}
 
+                </div>
+                <h1 className="colorPrimary mb-4 mt-5">World Stats</h1>
 
+                <div className="tableContainer ">
 
+                    <table className="fixed_headers table-hover searchable sortable">
+                        <thead className="thead-light tHead">
+                            <tr>
+                                <th className='text-left' scope="col">Country</th>
+                                <th className='text-right' scope="col">New Confirmed</th>
+                                <th className='text-right' scope="col">New Recovered</th>
+                                <th className='text-right' scope="col">New Deaths</th>
+                                <th className='text-right' scope="col">Total Confirmed</th>
+                                <th className='text-right' scope="col">Total Recovered</th>
+                                <th className='text-right' scope="col">Total Deaths</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {summary.map((eachCountry, index) => (
+                                <tr key={index}>
+                                    <td><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
+                                    <td className='text-right'> {eachCountry.NewConfirmed}</td>
+                                    <td className='text-right'>{eachCountry.NewRecovered}</td>
+                                    <td className='text-right'>{eachCountry.NewDeaths}</td>
+                                    <td className='text-right'>{eachCountry.TotalConfirmed}</td>
+                                    <td className='text-right'>{eachCountry.TotalRecovered}</td>
+                                    <td className='text-right'>{eachCountry.TotalDeaths}</td>
 
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             <style jsx>
                 {`
-             
+                .colorPrimary {
+                    color: ${colors.primary};
+                  }
+.fixed_headers {
+    
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.fixed_headers th{
+    padding: 15px 17px;
+
+width: 180px   
+  }
+.fixed_headers td {
+    padding: 15px 21px;
+
+    width: 180px
+}
+
+.fixed_headers thead {
+  background-color: ${colors.primary};
+  color: #fff;
+  padding: 0px 15px;
+}
+.fixed_headers thead tr {
+  display: block;
+  position: relative;
+}
+.fixed_headers tbody {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 500px;
+}
+.fixed_headers tbody tr:nth-child(even) {
+  background-color: ${colors.offWhite};
+}
+
+
+
+
+.tableContainer{
+    height: 600px;
+    overflow: auto
+}
+table {
+    position: relative;
+    border-collapse: collapse; 
+  }
+.tHead{
+ 
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+             @media(max-width: 991px){
+                 .scroll{
+                     overflow-x: scroll
+                 }
+             }
                   select {
                    
                     height: 40px;
