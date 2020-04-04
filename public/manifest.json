@@ -1,14 +1,14 @@
 {
-  "name": "Covid Tracker",
-  "short_name": "Covid Tracker",
+  "name": "CovidTracker",
+  "short_name": "CovidTracker",
   "description": "Important updates on COVID-19",
   "icons": [{
-    "src": "/static/pwa.png",
+    "src": "/static/ct-logo.png",
     "sizes": "192x192",
     "type": "image/png"
   }],
   "theme_color": "#819bdc",
-  "background_color": "#65b77a",
+  "background_color": "#819bdc",
   "start_url": "/",
   "display": "standalone"
 }

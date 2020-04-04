@@ -11,17 +11,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="icon" href="/ct-logo.png" />
           <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <style jsx global>
-            {`
-         
-          
-          `}
-          </style>
         </body>
       </Html>
     )

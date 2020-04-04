@@ -4,122 +4,12 @@ import { colors } from "./styles/styles"
 export default function Footer({ siteTitle }) {
   return (
     <footer className="bgPrimary">
-      <div className="container pt-5">
+      <div className="container">
         <div className="row text-center">
-          <div className="col-md-3 fitContent">
-            <ul className="p-0">
-              <li className="listItem">
-                <h2 className="text-white my-3">{siteTitle}</h2>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  How It Works
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Preferences
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-md-3 fitContent">
-            <ul className="p-0">
-              <li className="listItem">
-                <h4>
-                  <a href="#" className="itemLink">
-                    The Team
-                  </a>
-                </h4>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  About Us
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Careers
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Press & Media
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Ambassadors
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-md-3 fitContent">
-            <ul className="p-0">
-              <li className="listItem">
-                <h4>
-                  <a href="#" className="itemLink">
-                    Legal
-                  </a>
-                </h4>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Privacy Policy
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Terms
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Security
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-md-3 fitContent">
-            <ul className="p-0">
-              <li className="listItem">
-                <h4>
-                  <a href="#" className="itemLink">
-                    Connect
-                  </a>
-                </h4>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  <i className="fa faFont fa-twitter" aria-hidden="true"></i>
-                  &nbsp;&nbsp;
-                  <i className="fa faFont fa-facebook" aria-hidden="true"></i>
-                  &nbsp;&nbsp;
-                  <i className="fa faFont fa-whatsapp" aria-hidden="true"></i>
-                  &nbsp;&nbsp;
-                  <i className="fa faFont fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  support@covid-tracker.com
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  Customer Stories
-                </a>
-              </li>
-              <li className="listItem">
-                <a href="#" className="itemLink">
-                  FAQ
-                </a>
-              </li>
-            </ul>
-          </div>
 
-          <p className="text-center text-white mt-5 mb-3 aRR">
-            © {new Date().getFullYear()}, {siteTitle} | All Rights Reserved.
+          <p className="text-center text-white  my-2 aRR">
+            © {new Date().getFullYear()}, {siteTitle}.&nbsp;&nbsp; <i className="fa fa-github" aria-hidden="true"></i>
+            &nbsp;&nbsp;&nbsp;<i className="fa fa-twitter" aria-hidden="true"></i>
           </p>
         </div>
       </div>
@@ -127,11 +17,7 @@ export default function Footer({ siteTitle }) {
         .fitContent {
           width: fit-content;
         }
-        @media (max-width: 767px) {
-          .fitContent {
-            width: 49%;
-          }
-        }
+       
         .colorPrimary {
           color: ${colors.primary};
         }
@@ -150,7 +36,16 @@ export default function Footer({ siteTitle }) {
           padding: 10px 0;
         }
         .aRR {
-          margin: 0 auto;
+          margin: 0 34%;
+        }
+        @media (max-width: 767px) {
+          .fitContent {
+            width: 49%;
+          }
+        
+          .aRR {
+            margin: 0 auto;
+          }
         }
       `}</style>
     </footer>

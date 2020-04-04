@@ -1,9 +1,9 @@
 module.exports = {
-  defaultTitle: "Covid Tracker",
+  defaultTitle: "CovidTracker",
   logo: "../images/see-jobs-logo.png",
   author: "adedaniel & jaywonder20",
-  url: "https://covid-tracker.com",
-  legalName: "Covid Tracker",
+  url: "https://covidtracker.com",
+  legalName: "CovidTracker",
   defaultDescription: "Important updates on COVID-19",
   socialLinks: {
     twitter: "http://www.twitter.com/smakosh",

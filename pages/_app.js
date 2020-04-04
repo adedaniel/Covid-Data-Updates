@@ -99,7 +99,7 @@ export default class MyApp extends App {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
           ></link>
-
+          <link rel="icon" href="/ct-logo.png" />
 
           <title>Covid Tracker</title>
         </Head>
@@ -132,6 +132,7 @@ export default class MyApp extends App {
           body {
             font-family: Jaldi;
             font-size: 20px;
+      scrollbar-width: thin;
             
           }
          

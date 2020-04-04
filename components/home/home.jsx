@@ -24,6 +24,7 @@ import FixedNews from "./FixedNews";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import TopCasesLocal from "./TopCasesLocal";
 import TopCasesInternational from "./TopCasesInternational";
+import { DoctorIcon } from "../imageComponents/Images";
 // import WordCloud from "./WordCloud";
 
 export default function Home() {
@@ -31,23 +32,23 @@ export default function Home() {
     <div>
       <div className=" scrollable" >
 
-
-        <div className="setResponse h90">
-          <div className="container">
-            <div className="row vh100">
-              <div className="col-md-7 captionParent h90">
-                <div className="captionArea responsiveCenter">
-                  <h1>
-                    <span className="hoverEffect">
-                      COVID-19
+        <div className="doctorBackground">
+          <div className="setResponse h90">
+            <div className="container">
+              <div className="row vh100">
+                <div className="col-md-7 captionParent h90">
+                  <div className="captionArea responsiveCenter">
+                    <h1>
+                      <span className="hoverEffect">
+                        COVID-19
                     </span>
-                  </h1>
-                  <h5 className='respFont'>
-                    Severe Acute Respiratory Syndrome Coronavirus-2 (SARS-CoV-2)
-                    is the name given to the 2019 novel coronavirus. COVID-19 is
-                    the name given to the disease associated with the virus.
+                    </h1>
+                    <h5 className='respFont text-justify'>
+                      Severe Acute Respiratory Syndrome Coronavirus-2 (SARS-CoV-2)
+                      is the name given to the 2019 novel coronavirus. COVID-19 is
+                      the name given to the disease associated with the virus.
                       <br />
-                    <br />
+                      <br />
                       In December 2019, It was detected in
                       three patients with pneumonia connected to the cluster of acute respiratory illness
                       cases from Wuhan, China. By the end of February 2020, several were experiencing sustained
@@ -58,19 +59,18 @@ export default function Home() {
 
 
                   </h5>
+                  </div>
                 </div>
-              </div>
-              <div className="col-md-5 bgSpace captionParent h90 p-0" />
-              <div className="text-center w-100">
-                <div className="animated infinite bounce slow">
-                  <i className="fa fa-angle-down angles" aria-hidden="true" />
+                <div className="col-md-5 bgSpace captionParent h90 p-0" />
+                <div className="text-center w-100">
+                  <div className="animated infinite bounce slow">
+                    <i className="fa fa-angle-down angles" aria-hidden="true" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
         <div className="py-5">
           <div className="container">
             <h1 className="colorPrimary">Trending Words</h1>
@@ -144,6 +144,9 @@ export default function Home() {
 
       <style jsx>
         {`
+        .doctorBackground{
+          background-image: url('/images/doctor.png')
+        }
         .caseNumber{
           font-size: 4.5rem
         }
@@ -214,7 +217,7 @@ export default function Home() {
           }
 
           .h90 {
-            height: 94%;
+            height: 85%;
           }
           .vh100 {
             height: calc(100vh - 60px);
@@ -222,7 +225,6 @@ export default function Home() {
           .smallerText {
             font-weight: 600;
           }
-      
           .angles {
             color: ${colors.primary};
             font-size: 40px;

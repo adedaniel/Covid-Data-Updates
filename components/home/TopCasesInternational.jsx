@@ -10,7 +10,7 @@ export default function TopCasesInternational() {
     let cases = [];
     if (summary.length !== 0) {
 
-        cases = summary.sort(function (a, b) {
+        cases = [...summary].sort(function (a, b) {
             return b.TotalConfirmed - a.TotalConfirmed;
         })
         // console.log(summary);
