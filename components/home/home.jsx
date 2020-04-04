@@ -1,30 +1,14 @@
 import React from "react";
-// import { Link } from "gatsby"
-// import DoctorImageBackground from "../ImageExports/DoctorImageBackground";
 import { colors } from "../styles/styles";
-// import Typed from "react-typed";
-// import Link from "gatsby-plugin-transition-link";
-// import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { DefaultButton, OutlineButton } from "../button";
-// import FutureImage from "../ImageExports/FutureImage";
-// import LookingOutImage from "../ImageExports/LookingOutimage";
-// import ListImage from "../ImageExports/ListImage";
-// import SpreadImage from "../ImageExports/SpreadImage";
-// import PersonalizedImage from "../ImageExports/PersonalizedImage";
-// import ResultsImage from "../ImageExports/ResultsImage";
-// import RelevanceImage from "../ImageExports/RelevanceImage";
-// import NotificationImage from "../ImageExports/NotificationImage";
-// import TimeImage from "../ImageExports/TimeImage";
-// import AccessibleImage from "../ImageExports/WordCloudImage";
-// import WatchingImage from "../ImageExports/WatchingImage";
-// import TestedImage from "../ImageExports/TestedImage";
-// import ChillImage from "../ImageExports/ChillImage";
+
 import FixedNews from "./FixedNews";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import TopCasesLocal from "./TopCasesLocal";
 import TopCasesInternational from "./TopCasesInternational";
 import { DoctorIcon } from "../imageComponents/Images";
+import Summary from "./Summary";
 // import WordCloud from "./WordCloud";
 
 export default function Home() {
@@ -71,7 +55,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="py-5">
+
+        <div className="container mt-3">
+          <Summary />
+
+        </div>
+
+        <div className="pb-5 pt-4">
           <div className="container">
             <h1 className="colorPrimary">Trending Words</h1>
             <h5>We have been able to fetch the most used words related to the virus based on their numbers of appearance on social media.<br />

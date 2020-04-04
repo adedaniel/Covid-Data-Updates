@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react'
 import { colors } from './styles/styles'
 import Chart from "react-google-charts";
 import MyContext from "./Context";
+import { CountriesIcon, FineIcon, GoneIcon, ConfirmedIcon } from "./imageComponents/Images";
 
 export default function Infographics() {
     const [country, setCountry] = useState('Nigeria')
-    const { timeSeries, summary } = useContext(MyContext);
+    const { timeSeries, summary, all } = useContext(MyContext);
     let nationalStates = [['Days', 'Confirmed', 'Deaths', 'Recovered']];
     let countriesNames;
 
@@ -101,6 +102,60 @@ export default function Infographics() {
                         : ""}
 
                 </div>
+
+                <div className="container my-5">
+                    <div className="row">
+
+                        {Object.entries(all).length !== 0 ?
+                            <>
+                                <div className="col-md-3 mb-3">
+                                    <div className="allCards">
+                                        <CountriesIcon width="70%" />
+                                        <h3 className='caseNumber colorPrimary'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                        <h3>Countries</h3>
+                                        <h5>Affected</h5>
+                                    </div>
+                                </div>
+                                <div className="col-md-3 mb-3">
+                                    <div className="allCards">
+                                        <ConfirmedIcon width="70%" />
+                                        <h3 className='caseNumber colorPrimary'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                        <h3>Confirmed</h3>
+                                        <h5>Cases</h5>
+                                    </div>
+
+                                </div>
+                                <div className="col-md-3 mb-3">
+                                    <div className="allCards">
+                                        <FineIcon width="70%" />
+                                        <h3 className='caseNumber colorPrimary'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                        <h3>Recovered</h3>
+                                        <h5>Cases</h5>
+                                    </div>
+                                </div>
+                                <div className="col-md-3 mb-3">
+                                    <div className="allCards">
+                                        <GoneIcon width="70%" />
+                                        <h3 className='caseNumber colorPrimary'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                        <h3>Death</h3>
+                                        <h5>Cases</h5>
+                                    </div>
+                                </div>
+                            </>
+                            : ""
+
+
+                        }
+
+
+                    </div>
+                </div>
+
+
                 <h1 className="colorPrimary mb-4 mt-5">World Stats</h1>
 
                 <div className="tableContainer ">
@@ -138,6 +193,18 @@ export default function Infographics() {
 
             <style jsx>
                 {`
+                .caseNumber{
+                    font-size: 3.0rem
+                  }
+                .allCards{
+                    background-color: ${colors.white};
+                    padding: 20px 5px;
+                    border-radius: 8px;
+                    text-align: center;
+                    height: 180px;
+                    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
+                    0 1px 6px rgba(0, 0, 0, 0.04);
+                  }
                 .colorPrimary {
                     color: ${colors.primary};
                   }
