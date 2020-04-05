@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { colors } from '../styles/styles'
 import MyContext from "../Context";
+import FadeIn from "react-fade-in";
 
 
 export default function TopCasesLocal() {
@@ -30,44 +31,54 @@ export default function TopCasesLocal() {
 
   return (
     <>
-      {cases.splice(0, 6).map((eachCase, index) => (
-        <div key={index} className="col-sm-2">
-          <div className="topLocalCase mb-3">
-            <h1 className='caseNumber colorPrimary'>{eachCase.val}</h1>
+      {cases.length !== 0 ?
+        cases.splice(0, 6).map((eachCase, index) => (
+          <div key={index} className="col-sm-2">
+            <div className="topLocalCase mb-3">
+              <FadeIn>
+                <h1 className='caseNumber colorPrimary'>{eachCase.val}</h1>
 
-            <h4 className='caseState colorPrimary'>{ncdc.States[eachCase.id]}</h4>
-            <style jsx>{`
-          .caseNumber{
-              font-size: 4.5rem
-            }
+                <h4 className='caseState colorPrimary'>{ncdc.States[eachCase.id]}</h4>
+              </FadeIn>
+            </div>
+          </div>
+        ))
+        :
+
+        <div className='text-center w-100'>
+          <div className="spinner-grow colorPrimary  text-center" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      }
+      <style jsx>{`
+        .caseNumber{
+            font-size: 4.5rem
+          }
+          .topLocalCase{
+            background-color: ${colors.white};
+            padding: 20px 5px;
+            border-radius: 8px;
+            text-align: center;
+            height: 180px;
+            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
+            0 1px 6px rgba(0, 0, 0, 0.04);
+          }
+          @media(max-width: 767px){
             .topLocalCase{
               background-color: ${colors.white};
-              padding: 20px 5px;
               border-radius: 8px;
+              padding: 0;
               text-align: center;
-              height: 180px;
+              height: 136px;
               box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
               0 1px 6px rgba(0, 0, 0, 0.04);
             }
-            @media(max-width: 767px){
-              .topLocalCase{
-                background-color: ${colors.white};
-                border-radius: 8px;
-                padding: 0;
-                text-align: center;
-                height: 136px;
-                box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
-                0 1px 6px rgba(0, 0, 0, 0.04);
-              }
-            }
-            .colorPrimary {
-              color: ${colors.primary};
-            }
-          `}</style>
-          </div>
-        </div>
-      ))}
-
+          }
+          .colorPrimary {
+            color: ${colors.primary} !important;
+          }
+        `}</style>
 
     </>
   )

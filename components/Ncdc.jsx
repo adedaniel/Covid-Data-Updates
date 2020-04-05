@@ -3,68 +3,89 @@ import { colors } from './styles/styles'
 import MyContext from "./Context";
 
 export default function Ncdc() {
-    const { ncdc, summary } = useContext(MyContext);
-    // console.log(ncdc.Numbers);
-    let cases = [];
-    let numbers;
-    var nigeriaData = [];
-    if (Object.entries(ncdc).length !== 0) {
-        var list = ncdc.States;
-        cases = Object.values(list)
-        numbers = ncdc.Numbers
-        nigeriaData = summary.filter(obj => {
-            return obj.Country === 'Nigeria'
-        })
-    }
+  const { ncdc, summary } = useContext(MyContext);
+  // console.log(ncdc.Numbers);
+  let cases = [];
+  let numbers;
+  var nigeriaData = [];
+  if (Object.entries(ncdc).length !== 0) {
+    var list = ncdc.States;
+    cases = Object.values(list)
+    numbers = ncdc.Numbers
+    nigeriaData = summary.filter(obj => {
+      return obj.Country === 'Nigeria'
+    })
+  }
 
-    return (
-        <div className='container pt-3 mb-5'>
-            <h1 className='mb-4'>
-                <span className="hoverEffect">NCDC Information</span>
-            </h1>
+  return (
+    <div className='container pt-3 mb-5'>
+      <h1 className='mb-4'>
+        <span className="hoverEffect">NCDC Information</span>
+      </h1>
 
-            {nigeriaData.map((eachData, index) => (
-                <div key={index}>
-                    <h1 className="colorPrimary mt-4">Presently,</h1>
-                    <h5>There are <strong>{eachData.TotalConfirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{eachData.TotalRecovered}</strong> of them have recovered and <strong>{eachData.TotalDeaths}</strong> have died</h5>
+      {
+        Object.entries(ncdc).length !== 0 ?
 
-                </div>
-            ))}
-            <h1 className="colorPrimary mb-2 mt-5"> <span>
-                {nigeriaData.map((eachData, index) => (
-                    <img key={index} src={`https://www.countryflags.io/${eachData.flag}/shiny/64.png`} />
-                ))}
-            </span> Nigeria's Stats</h1>
-
-            <div className="tableContainer ">
-
-                <table className="fixed_headers w-100 table-hover searchable sortable">
-                    <thead className="thead-light tHead">
-                        <tr>
-                            <th className='text-center w-50 float-left d-inherit' scope="col">State</th>
-                            <th className='text-center w-50 float-right' scope="col">Confirmed Cases</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {
-                            cases.map((eachState, index) => (
-                                <tr key={index} className='d-flex'>
-                                    <td className='text-center w-50 float-left d-inherit'>{eachState}</td>
-                                    <td className='text-center w-50 float-right'>{numbers[index]}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+          nigeriaData.map((eachData, index) => (
+            <div key={index}>
+              <h1 className="colorPrimary mt-4">Presently,</h1>
+              <h5>There are <strong>{eachData.TotalConfirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{eachData.TotalRecovered}</strong> of them have recovered and <strong>{eachData.TotalDeaths}</strong> have died.</h5>
 
             </div>
+          ))
+          : <h4>Hold on a second...</h4>
+      }
+      <h1 className="colorPrimary mb-2 mt-5"> <span>
+        {nigeriaData.map((eachData, index) => (
+          <img key={index} src={`https://www.countryflags.io/${eachData.flag}/shiny/64.png`} />
+        ))}
+      </span> Nigeria's Stats</h1>
 
-            <h6>All figures here are gotten from the Nigeria Centre for Disease Control (NCDC).</h6>
+      <div className="tableContainer ">
 
-            <style jsx>{`
-           
+        <table className="fixed_headers w-100 table-hover searchable sortable">
+          <thead className="thead-light tHead">
+            <tr>
+              <th className='text-center w-50 float-left d-inherit' scope="col">State</th>
+              <th className='text-center w-50 float-right' scope="col">Confirmed Cases</th>
+
+            </tr>
+          </thead>
+          <tbody>
+
+            {
+              summary.length !== 0 ?
+                cases.map((eachState, index) => (
+                  <tr key={index} className='d-flex'>
+                    <td className='text-center w-50 float-left d-inherit'>{eachState}</td>
+                    <td className='text-center w-50 float-right'>{numbers[index]}</td>
+                  </tr>
+                ))
+                :
+
+                <div className='text-center w-100 mt-4'>
+                  <div className="spinner-grow colorPrimary  text-center" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+            }
+          </tbody>
+        </table>
+
+      </div>
+      <div className="infoWrapper">
+        <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>All figures here are gotten from the Nigeria Centre for Disease Control (NCDC).</small>
+      </div>
+
+      <style jsx>{`
+            .infoText{
+              font-size: 54%
+          }
+         .infoIcon{
+             font-size: small
+         }
+
 .countries {
     width: 251px !important;
   }
@@ -159,6 +180,6 @@ table {
         background-size: 10px 50px;
         color: #fff;
     `}</style>
-        </div>
-    )
+    </div>
+  )
 }
