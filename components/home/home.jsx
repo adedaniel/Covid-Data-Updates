@@ -38,7 +38,7 @@ export default function Home() {
                       cases from Wuhan, China. By the end of February 2020, several were experiencing sustained
                       local transmission of coronavirus disease.
                       <br /><br />
-                   Here, you'll be able to get realtime data
+                   Here, you'll be able to get realtime data using Artificial Intelligence (AI)
                     from different sources concerning the virus across different states in Nigeria and countries around the World.
 
 
@@ -65,7 +65,10 @@ export default function Home() {
           <div className="container">
             <h1 className="colorPrimary">Trending Words</h1>
             <h5>We have been able to fetch the most used words related to the virus based on their numbers of appearance on social media.<br />
-            Zoom in and take a look</h5>
+
+           Larger words indicate more frequent use and smaller ones indicate less frequent use.
+           <br /><br />
+           Zoom in and take a look</h5>
             <div className=" mt-5">
               <TransformWrapper
                 defaultScale={1}
@@ -140,7 +143,7 @@ export default function Home() {
 
         
         .doctorBackground{
-          background-image: url('/images/doctor.png');
+          background-image: url('/images/doctor.png?trace');
           background-attachment: fixed;
         }
         .icon{

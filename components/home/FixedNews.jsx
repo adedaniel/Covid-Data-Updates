@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { colors } from '../styles/styles'
 import Link from "next/link"
 import MyContext from "../Context";
+import FadeIn from 'react-fade-in';
 export default function FixedNews() {
   const { news } = useContext(MyContext);
   // const [news, setNews] = useState([])
@@ -23,26 +24,42 @@ export default function FixedNews() {
        </span>
       </h4>
       <div className='vh90'>
-        {news.slice(0, 5).map((eachNews) => (
-          <a target='_blank' rel="noopener noreferrer" key={eachNews.title} href={eachNews.link} className='text-dark text-decoration-none'>
-            <div className="bg-white newsCard py-2 px-2 my-2">
-              <h5 className='m-0'>{eachNews.title}</h5>
-              <small className='m-0 textGrey'>{eachNews.published}</small>
-              <h6>
-                {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
+        {
+          news.length !== 0 ?
+            news.slice(0, 5).map((eachNews) => (
+              <FadeIn key={eachNews.title}>
+                <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
+                  <div className="bg-white newsCard py-2 px-2 my-2">
+                    <h5 className='m-0'>{eachNews.title}</h5>
+                    <small className='m-0 textGrey'>{eachNews.published}</small>
+                    <h6>
+                      {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
 
-                <span className='newsLink text-decoration-none'>Read More</span>
-              </h6>
+                      <span className='newsLink text-decoration-none'>Read More</span>
+                    </h6>
 
+                  </div>
+                </a>
+              </FadeIn>
+            ))
+            :
+
+            <div className='text-center w-100'>
+              <div className="spinner-grow colorPrimary  text-center" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </a>
-        ))}
+
+        }
       </div>
 
       <div className='vh10 mt-1'>
         <Link href="/news"><h4 className='text-center seeMore hoverEffect pointer'>See More</h4></Link>
       </div>
       <style jsx>{`
+      .colorPrimary {
+        color: ${colors.primary} !important;
+      }
       .newsLink{
         color: ${colors.primary}
       }

@@ -139,11 +139,11 @@ export default class MyApp extends App {
         <style jsx global>{`
           @font-face {
             font-family: Jaldi;
-            src: url(fonts/Jaldi-Regular.ttf);
+            
             font-display: swap;
           }
           html {
-            font-family: "Jaldi", sans-serif;
+            font-family: "Jaldi", Arial;
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
           }

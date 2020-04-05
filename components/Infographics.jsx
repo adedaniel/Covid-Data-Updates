@@ -3,6 +3,7 @@ import { colors } from './styles/styles'
 import Chart from "react-google-charts";
 import MyContext from "./Context";
 import { CountriesIcon, FineIcon, GoneIcon, ConfirmedIcon } from "./imageComponents/Images";
+import FadeIn from 'react-fade-in';
 
 export default function Infographics() {
     const [country, setCountry] = useState('Nigeria')
@@ -56,53 +57,60 @@ export default function Infographics() {
                 </span>
                 <div className="scroll">
                     {Object.entries(timeSeries).length !== 0 ?
-
-                        <Chart
-                            width={'1000px'}
-                            height={'500px'}
-                            chartType="LineChart"
-                            loader={<div>Loading Chart</div>}
-                            data={nationalStates
-                            }
-                            options={{
-                                hAxis: {
-                                    title: 'Dates',
-                                    textStyle: {
-                                        color: colors.primary,
+                        <>
+                            <Chart
+                                width={'1000px'}
+                                height={'500px'}
+                                chartType="LineChart"
+                                loader={
+                                    <div className='text-center'>
+                                        <div className="spinner-grow colorPrimary text-center" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                }
+                                data={nationalStates
+                                }
+                                options={{
+                                    hAxis: {
+                                        title: 'Dates',
+                                        textStyle: {
+                                            color: colors.primary,
+                                            fontName: 'Jaldi',
+                                            fontSize: '20'
+                                        }
+                                    },
+                                    titleTextStyle: {
+                                        color: colors.primary,    // any HTML string color ('red', '#cc00cc')
                                         fontName: 'Jaldi',
-                                        fontSize: '20'
-                                    }
-                                },
-                                titleTextStyle: {
-                                    color: colors.primary,    // any HTML string color ('red', '#cc00cc')
-                                    fontName: 'Jaldi',
-                                    fontSize: '20', // 12, 18 whatever you want (don't specify px)
+                                        fontSize: '20', // 12, 18 whatever you want (don't specify px)
 
-                                },
-                                pointSize: 6,
-                                animation: {
-                                    startup: true,
-                                    easing: 'linear',
-                                    duration: 500,
-                                },
-                                vAxis: {
-                                    title: 'Cases',
-                                    textStyle: {
-                                        color: colors.primary,
-                                        fontName: 'Jaldi',
-                                        fontSize: '20'
-                                    }
-                                },
-                                curveType: 'function',
-                                colors: ['#b3aa0e', '#e2371d', '#14a52a']
-                            }}
-                            rootProps={{ 'data-testid': '2' }}
-                        />
-
+                                    },
+                                    pointSize: 6,
+                                    animation: {
+                                        startup: true,
+                                        easing: 'linear',
+                                        duration: 500,
+                                    },
+                                    vAxis: {
+                                        title: 'Cases',
+                                        textStyle: {
+                                            color: colors.primary,
+                                            fontName: 'Jaldi',
+                                            fontSize: '20'
+                                        }
+                                    },
+                                    curveType: 'function',
+                                    colors: ['#b3aa0e', '#e2371d', '#14a52a']
+                                }}
+                                rootProps={{ 'data-testid': '2' }}
+                            />
+                        </>
                         : ""}
-
                 </div>
-
+                <div className="infoWrapper">
+                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the chart to view the rest of the information</small>
+                </div>
                 <div className="container my-5">
                     <div className="row">
 
@@ -110,43 +118,56 @@ export default function Infographics() {
                             <>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <CountriesIcon width="60%" />
-                                        <h3 className='caseNumber colorPrimary m-0'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <FadeIn>
+                                            <CountriesIcon width="60%" />
+                                            <h3 className='caseNumber colorPrimary m-0'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3 className='m-0'>Countries</h3>
-                                        <h5 className='m-0'>Affected</h5>
+                                            <h3 className='m-0'>Countries</h3>
+                                            <h5 className='m-0'>Affected</h5>
+                                        </FadeIn>
                                     </div>
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <ConfirmedIcon width="60%" />
-                                        <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <FadeIn>
+                                            <ConfirmedIcon width="60%" />
+                                            <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3 className='m-0'>Active</h3>
-                                        <h5 className='m-0'>Cases</h5>
+                                            <h3 className='m-0'>Active</h3>
+                                            <h5 className='m-0'>Cases</h5>
+                                        </FadeIn>
                                     </div>
 
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <FineIcon width="60%" />
-                                        <h3 className='caseNumber colorPrimary m-0'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <FadeIn>
+                                            <FineIcon width="60%" />
+                                            <h3 className='caseNumber colorPrimary m-0'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3 className='m-0'>Recovered</h3>
-                                        <h5 className='m-0'>Cases</h5>
+                                            <h3 className='m-0'>Recovered</h3>
+                                            <h5 className='m-0'>Cases</h5>
+                                        </FadeIn>
                                     </div>
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <GoneIcon width="60%" />
-                                        <h3 className='caseNumber colorPrimary m-0'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <FadeIn>
+                                            <GoneIcon width="60%" />
+                                            <h3 className='caseNumber colorPrimary m-0'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3 className='m-0'>Death</h3>
-                                        <h5 className='m-0'>Cases</h5>
+                                            <h3 className='m-0'>Death</h3>
+                                            <h5 className='m-0'>Cases</h5>
+                                        </FadeIn>
                                     </div>
                                 </div>
                             </>
-                            : ""
+                            : <div className='text-center w-100 mt-4'>
+                                <div className="spinner-grow colorPrimary  text-center" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+
 
 
                         }
@@ -173,27 +194,51 @@ export default function Infographics() {
                             </tr>
                         </thead>
                         <tbody>
-                            {summary.map((eachCountry, index) => (
-                                <tr key={index}>
-                                    <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
-                                    <td className='text-center newConfirmed'> {eachCountry.NewConfirmed}</td>
-                                    <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
-                                    <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
-                                    <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
-                                    <td className='text-center newConfirmed'>{eachCountry.TotalRecovered}</td>
-                                    <td className='text-center newConfirmed'>{eachCountry.TotalDeaths}</td>
+                            {
+                                summary.length !== 0 ?
+                                    summary.map((eachCountry, index) => (
+                                        <tr key={index}>
+                                            <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
+                                            <td className='text-center newConfirmed'> {eachCountry.NewConfirmed}</td>
+                                            <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
+                                            <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
+                                            <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
+                                            <td className='text-center newConfirmed'>{eachCountry.TotalRecovered}</td>
+                                            <td className='text-center newConfirmed'>{eachCountry.TotalDeaths}</td>
 
-                                </tr>
-                            ))}
+                                        </tr>
+                                    ))
+                                    :
+                                    <div className='text-center w-100 mt-4'>
+                                        <div className="spinner-grow colorPrimary  text-center" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+
+                            }
                         </tbody>
                     </table>
                 </div>
+                <div className="infoWrapper">
 
+                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the table to view the rest of the fields</small>
+                </div>
             </div>
 
             <style jsx>
                 {`
-               
+                @media(min-width: 992px){
+                    .infoWrapper{
+display: none
+                    }
+                }
+                .infoText{
+                    font-size: 54%
+                }
+               .infoIcon{
+                   font-size: small
+               }
+
   .countries {
     width: 251px !important;
   }

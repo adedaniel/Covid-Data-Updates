@@ -9,8 +9,10 @@
     "export": "cross-env NEXT_EXPORT=true next build && cross-env NEXT_EXPORT=true next export"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "image-trace-loader": "^1.0.2",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^7.1.0",
     "imagemin-svgo": "^7.1.0",
