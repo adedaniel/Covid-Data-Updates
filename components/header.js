@@ -95,15 +95,7 @@ function Header({ siteTitle, active }) {
             </a>
               </Link>
             </li>
-            <li className={`nav-item mx3 sidebarList ${
-              active === 6 ? "active" : "inactive"
-              }`} >
-              <Link href="/contact">
-                <a className="nav-link js-scroll-trigger" >
-                  Contact
-            </a>
-              </Link>
-            </li>
+
           </ul>
         </div>
       </div>

@@ -79,7 +79,7 @@ export default function Infographics() {
                                     fontSize: '20', // 12, 18 whatever you want (don't specify px)
 
                                 },
-                                pointSize: 3,
+                                pointSize: 6,
                                 animation: {
                                     startup: true,
                                     easing: 'linear',
@@ -110,39 +110,39 @@ export default function Infographics() {
                             <>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <CountriesIcon width="70%" />
-                                        <h3 className='caseNumber colorPrimary'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <CountriesIcon width="60%" />
+                                        <h3 className='caseNumber colorPrimary m-0'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3>Countries</h3>
-                                        <h5>Affected</h5>
+                                        <h3 className='m-0'>Countries</h3>
+                                        <h5 className='m-0'>Affected</h5>
                                     </div>
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <ConfirmedIcon width="70%" />
-                                        <h3 className='caseNumber colorPrimary'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <ConfirmedIcon width="60%" />
+                                        <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3>Confirmed</h3>
-                                        <h5>Cases</h5>
+                                        <h3 className='m-0'>Confirmed</h3>
+                                        <h5 className='m-0'>Cases</h5>
                                     </div>
 
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <FineIcon width="70%" />
-                                        <h3 className='caseNumber colorPrimary'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <FineIcon width="60%" />
+                                        <h3 className='caseNumber colorPrimary m-0'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3>Recovered</h3>
-                                        <h5>Cases</h5>
+                                        <h3 className='m-0'>Recovered</h3>
+                                        <h5 className='m-0'>Cases</h5>
                                     </div>
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <div className="allCards">
-                                        <GoneIcon width="70%" />
-                                        <h3 className='caseNumber colorPrimary'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+                                        <GoneIcon width="60%" />
+                                        <h3 className='caseNumber colorPrimary m-0'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3>Death</h3>
-                                        <h5>Cases</h5>
+                                        <h3 className='m-0'>Death</h3>
+                                        <h5 className='m-0'>Cases</h5>
                                     </div>
                                 </div>
                             </>
@@ -163,25 +163,25 @@ export default function Infographics() {
                     <table className="fixed_headers table-hover searchable sortable">
                         <thead className="thead-light tHead">
                             <tr>
-                                <th className='text-left' scope="col">Country</th>
-                                <th className='text-right' scope="col">New Confirmed</th>
-                                <th className='text-right' scope="col">New Recovered</th>
-                                <th className='text-right' scope="col">New Deaths</th>
-                                <th className='text-right' scope="col">Total Confirmed</th>
-                                <th className='text-right' scope="col">Total Recovered</th>
-                                <th className='text-right' scope="col">Total Deaths</th>
+                                <th className='countries padd' scope="col">Country</th>
+                                <th className='text-center newConfirmed' scope="col">New Confirmed</th>
+                                <th className='text-center newConfirmed' scope="col">New Recovered</th>
+                                <th className='text-center newConfirmed' scope="col">New Deaths</th>
+                                <th className='text-center newConfirmed' scope="col">Total Confirmed</th>
+                                <th className='text-center newConfirmed' scope="col">Total Recovered</th>
+                                <th className='text-center newConfirmed' scope="col">Total Deaths</th>
                             </tr>
                         </thead>
                         <tbody>
                             {summary.map((eachCountry, index) => (
                                 <tr key={index}>
-                                    <td><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
-                                    <td className='text-right'> {eachCountry.NewConfirmed}</td>
-                                    <td className='text-right'>{eachCountry.NewRecovered}</td>
-                                    <td className='text-right'>{eachCountry.NewDeaths}</td>
-                                    <td className='text-right'>{eachCountry.TotalConfirmed}</td>
-                                    <td className='text-right'>{eachCountry.TotalRecovered}</td>
-                                    <td className='text-right'>{eachCountry.TotalDeaths}</td>
+                                    <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
+                                    <td className='text-center newConfirmed'> {eachCountry.NewConfirmed}</td>
+                                    <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
+                                    <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
+                                    <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
+                                    <td className='text-center newConfirmed'>{eachCountry.TotalRecovered}</td>
+                                    <td className='text-center newConfirmed'>{eachCountry.TotalDeaths}</td>
 
                                 </tr>
                             ))}
@@ -193,6 +193,16 @@ export default function Infographics() {
 
             <style jsx>
                 {`
+               
+  .countries {
+    width: 251px !important;
+  }
+  .newConfirmed{
+    width: 200px !important;
+}
+  .padd{
+    padding-right: 41px !important
+}
                 .caseNumber{
                     font-size: 3.0rem
                   }
@@ -201,7 +211,6 @@ export default function Infographics() {
                     padding: 20px 5px;
                     border-radius: 8px;
                     text-align: center;
-                    height: 180px;
                     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
                     0 1px 6px rgba(0, 0, 0, 0.04);
                   }

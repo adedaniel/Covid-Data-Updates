@@ -9,6 +9,7 @@ import TopCasesLocal from "./TopCasesLocal";
 import TopCasesInternational from "./TopCasesInternational";
 import { DoctorIcon } from "../imageComponents/Images";
 import Summary from "./Summary";
+import WordCloud from "./WordCloud";
 // import WordCloud from "./WordCloud";
 
 export default function Home() {
@@ -76,21 +77,24 @@ export default function Home() {
                   <>
                     <div className="tools">
                       <div className="reset float-right">
-                        <DefaultButton onClick={resetTransform} padding='4px 25px' borderRadius='0' font='25px'>X</DefaultButton>
+                        <DefaultButton onClick={resetTransform} padding='4px 25px' borderRadius='0' font='25px'><i className="fa fa-expand" aria-hidden="true"></i></DefaultButton>
                       </div>
 
                       <div className="zoom">
 
-                        <DefaultButton onClick={zoomIn} padding='4px 25px' borderRadius='0' font='25px'>+</DefaultButton>
+                        <DefaultButton onClick={zoomIn} padding='4px 25px' borderRadius='0' font='25px'><i className="fa fa-plus icon" aria-hidden="true"></i></DefaultButton>
                         &nbsp;&nbsp;
-                        <OutlineButton onClick={zoomOut} padding='4px 25px' borderRadius='0' font='25px'>-</OutlineButton>
+                        <OutlineButton onClick={zoomOut} padding='4px 25px' borderRadius='0' font='25px'><i className="fa fa-minus icon" aria-hidden="true"></i></OutlineButton>
                       </div>
 
                     </div>
                     <div className='imageBorder'>
                       <TransformComponent>
                         <div className="wordcloud">
-                          <img width='100%' height='100%' src="http://coronadatasource.herokuapp.com/static/corona.png" alt="wordcloud" />
+                          {
+                            // <img width='100%' height='100%' src="https://coronadatasource.herokuapp.com/static/corona.png" alt="wordcloud" />
+                          }
+                          <WordCloud />
                         </div>
                       </TransformComponent>
                     </div>
@@ -135,7 +139,11 @@ export default function Home() {
       <style jsx>
         {`
         .doctorBackground{
-          background-image: url('/images/doctor.png')
+          background-image: url('/images/doctor.png');
+          background-attachment: fixed;
+        }
+        .icon{
+          font-size: 20px
         }
         .caseNumber{
           font-size: 4.5rem

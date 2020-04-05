@@ -28,11 +28,12 @@ export default function TopCasesInternational() {
                         <div className="topCase mb-3">
                             <h3 className='caseNumber colorPrimary'>{eachCase.TotalConfirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                            <span> <img src={`https://www.countryflags.io/${eachCase.flag}/flat/32.png`} /></span> <span>&nbsp;  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
+                            <span> <img src={`https://www.countryflags.io/${eachCase.flag}/shiny/32.png`} /></span> <span>&nbsp;  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
                             <style jsx>{`
                   .caseNumber{
                       font-size: 3.0rem
                     }
+                  
                     .topCase{
                       background-color: ${colors.white};
                       padding: 20px 5px;
@@ -41,6 +42,17 @@ export default function TopCasesInternational() {
                       height: 180px;
                       box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
                       0 1px 6px rgba(0, 0, 0, 0.04);
+                    }
+                    @media(max-width: 767px){
+                        .topCase{
+                            background-color: ${colors.white};
+                            padding: 20px 5px;
+                            border-radius: 8px;
+                            text-align: center;
+                            height: 150px;
+                            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
+                            0 1px 6px rgba(0, 0, 0, 0.04);
+                          }
                     }
                     .colorPrimary {
                       color: ${colors.primary};

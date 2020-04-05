@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../styles/styles'
 import MyContext from "../Context";
 
@@ -32,7 +32,7 @@ export default function TopCasesLocal() {
     <>
       {cases.splice(0, 6).map((eachCase, index) => (
         <div key={index} className="col-sm-2">
-          <div className="topCase mb-3">
+          <div className="topLocalCase mb-3">
             <h1 className='caseNumber colorPrimary'>{eachCase.val}</h1>
 
             <h4 className='caseState colorPrimary'>{ncdc.States[eachCase.id]}</h4>
@@ -40,7 +40,7 @@ export default function TopCasesLocal() {
           .caseNumber{
               font-size: 4.5rem
             }
-            .topCase{
+            .topLocalCase{
               background-color: ${colors.white};
               padding: 20px 5px;
               border-radius: 8px;
@@ -48,6 +48,17 @@ export default function TopCasesLocal() {
               height: 180px;
               box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
               0 1px 6px rgba(0, 0, 0, 0.04);
+            }
+            @media(max-width: 767px){
+              .topLocalCase{
+                background-color: ${colors.white};
+                border-radius: 8px;
+                padding: 0;
+                text-align: center;
+                height: 136px;
+                box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
+                0 1px 6px rgba(0, 0, 0, 0.04);
+              }
             }
             .colorPrimary {
               color: ${colors.primary};

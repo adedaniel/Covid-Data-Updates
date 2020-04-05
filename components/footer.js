@@ -8,8 +8,16 @@ export default function Footer({ siteTitle }) {
         <div className="row text-center">
 
           <p className="text-center text-white  my-2 aRR">
-            © {new Date().getFullYear()}, {siteTitle}.&nbsp;&nbsp; <i className="fa fa-github" aria-hidden="true"></i>
-            &nbsp;&nbsp;&nbsp;<i className="fa fa-twitter" aria-hidden="true"></i>
+            © {new Date().getFullYear()}, {siteTitle}.&nbsp;&nbsp;
+
+            <span className='block'>
+              adedaniel  <a target="_blank" href="https://github.com/adedaniel"><i className="fa text-white fa-github" aria-hidden="true"></i></a>
+          &nbsp;&nbsp; <a target="_blank" href="https://twitter.com/ijebu_developer"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
+
+
+          &nbsp;&nbsp; jaywonder20 <a target="_blank" href="https://github.com/jaywonder20"><i className="fa text-white fa-github" aria-hidden="true"></i></a>
+          &nbsp;&nbsp; <a target="_blank" href="https://twitter.com/jaywonder20"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
+            </span>
           </p>
         </div>
       </div>
@@ -36,7 +44,7 @@ export default function Footer({ siteTitle }) {
           padding: 10px 0;
         }
         .aRR {
-          margin: 0 34%;
+          margin: 0 25%;
         }
         @media (max-width: 767px) {
           .fitContent {
@@ -45,6 +53,12 @@ export default function Footer({ siteTitle }) {
         
           .aRR {
             margin: 0 auto;
+          }
+          
+        }
+        @media (min-width: 768px) and (max-width: 991px) {
+          .aRR {
+            margin: 0 17%;
           }
         }
       `}</style>

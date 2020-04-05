@@ -110,8 +110,16 @@ export default class MyApp extends App {
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
           ></link>
           <link rel="icon" href="/ct-logo.png" />
-
-          <title>Covid Tracker</title>
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-title" content="CovidTracker" />
+          <link href="/ct-logo.png" sizes="2048x2732" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="1668x2224" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="1536x2048" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="1125x2436" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="1242x2208" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="750x1334" rel="apple-touch-startup-image" />
+          <link href="/ct-logo.png" sizes="640x1136" rel="apple-touch-startup-image" />
+          <title>CovidTracker</title>
         </Head>
 
         <Provider
