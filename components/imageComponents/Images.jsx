@@ -44,3 +44,12 @@ export const CountriesIcon = ({ width }) => {
     );
 
 };
+export const LogoIcon = ({ width }) => {
+    return (
+        <>
+            <img src="/images/ct-logo.png" alt="logo" width={width} />
+
+        </>
+    );
+
+};

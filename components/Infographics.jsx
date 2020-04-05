@@ -122,7 +122,7 @@ export default function Infographics() {
                                         <ConfirmedIcon width="60%" />
                                         <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                        <h3 className='m-0'>Confirmed</h3>
+                                        <h3 className='m-0'>Active</h3>
                                         <h5 className='m-0'>Cases</h5>
                                     </div>
 

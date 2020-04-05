@@ -10,13 +10,12 @@ import TopCasesInternational from "./TopCasesInternational";
 import { DoctorIcon } from "../imageComponents/Images";
 import Summary from "./Summary";
 import WordCloud from "./WordCloud";
-// import WordCloud from "./WordCloud";
 
 export default function Home() {
   return (
     <div>
-      <div className=" scrollable" >
 
+      <div className=" scrollable" >
         <div className="doctorBackground">
           <div className="setResponse h90">
             <div className="container">
@@ -138,6 +137,8 @@ export default function Home() {
 
       <style jsx>
         {`
+
+        
         .doctorBackground{
           background-image: url('/images/doctor.png');
           background-attachment: fixed;
