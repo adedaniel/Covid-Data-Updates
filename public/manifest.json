@@ -3,7 +3,7 @@
   "short_name": "CovidTracker",
   "description": "Important updates on COVID-19",
   "icons": [{
-    "src": "/static/ct-logo.png",
+    "src": "/ct-logo.png",
     "sizes": "192x192",
     "type": "image/png"
   }],

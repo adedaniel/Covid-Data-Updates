@@ -130,7 +130,7 @@ export default function FAQS() {
               aria-expanded="false"
               aria-controls="collapseSix"
             >
-              Can I catch COVID-19 from the feces of someone with the disease?
+              Can I catch COVID-19 from the faeces of someone with the disease?
             </h3>
           </div>
           <div
@@ -140,9 +140,9 @@ export default function FAQS() {
             data-parent="#accordionExample"
           >
             <div className="card-body">
-              The risk of catching COVID-19 from the feces of an infected person
+              The risk of catching COVID-19 from the faeces of an infected person
               appears to be low. While initial investigations suggest the virus
-              may be present in feces in some cases, spread through this route
+              may be present in faeces in some cases, spread through this route
               is not a main feature of the outbreak. WHO is assessing ongoing
               research on the ways COVID-19 is spread and will continue to share
               new findings. Because this is a risk, however, it is another
@@ -406,7 +406,7 @@ export default function FAQS() {
         .card-header {
           background-color: ${colors.primary};
           color: white;
-          border-radius: 0px 0px 10px 10px !important;
+          padding: 10px 1.25rem;
           box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04),
             0 1px 6px rgba(0, 0, 0, 0.04) !important;
         }
