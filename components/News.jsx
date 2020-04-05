@@ -38,7 +38,7 @@ export default function News() {
                                             <img className='borderRadius' height='100%' width='100%' src={eachNews.image} alt={eachNews.title} />
                                         </div>
                                         <div className="col-sm-10 summary py-3">
-                                            <h3 className='m-0'>{eachNews.title}</h3>
+                                            <h4 className='m-0'>{eachNews.title}</h4>
                                             <small className='m-0 textGrey'>{eachNews.published}</small>
                                             <h6>
                                                 {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
@@ -91,7 +91,7 @@ export default function News() {
                         {internationalPostsToDisplay.map((eachNews, index) => (
                             <a target='_blank' rel="noopener noreferrer" key={index} href={eachNews.link} className='text-dark text-decoration-none'>
                                 <div className="bg-white newsCard py-3 px-4 my-3">
-                                    <h3 className='m-0'>{eachNews.title}</h3>
+                                    <h4 className='m-0'>{eachNews.title}</h4>
                                     <small className='m-0 textGrey'>{eachNews.published}</small>
                                     <h6>
                                         {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}

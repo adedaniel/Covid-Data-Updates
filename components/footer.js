@@ -12,11 +12,11 @@ export default function Footer({ siteTitle }) {
 
             <span className='block'>
               adedaniel  <a target="_blank" href="https://github.com/adedaniel"><i className="fa text-white fa-github" aria-hidden="true"></i></a>
-          &nbsp;&nbsp; <a target="_blank" href="https://twitter.com/ijebu_developer"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
+          &nbsp; <a target="_blank" href="https://twitter.com/ijebu_developer"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
 
 
           &nbsp;&nbsp; jaywonder20 <a target="_blank" href="https://github.com/jaywonder20"><i className="fa text-white fa-github" aria-hidden="true"></i></a>
-          &nbsp;&nbsp; <a target="_blank" href="https://twitter.com/jaywonder20"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
+          &nbsp; <a target="_blank" href="https://twitter.com/jaywonder20"><i className="fa text-white fa-twitter" aria-hidden="true"></i></a>
             </span>
           </p>
         </div>
@@ -45,6 +45,11 @@ export default function Footer({ siteTitle }) {
         }
         .aRR {
           margin: 0 25%;
+        }
+        @media (max-width: 499px) {
+          .block {
+display: block
+          } 
         }
         @media (max-width: 767px) {
           .fitContent {

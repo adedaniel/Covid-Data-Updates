@@ -5,6 +5,8 @@ import { colors } from "./styles/styles";
 // import LogoImage from "./ImageExports/LogoImage";
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 import Link from 'next/link'
+import { LogoIcon } from "./imageComponents/Images";
+
 function Header({ siteTitle, active }) {
   // const [active, setActive] = useState(1)
   const [topClass, setTopClass] = useState("");
@@ -36,15 +38,86 @@ function Header({ siteTitle, active }) {
           {siteTitle}
         </h2>
         <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          className="Toggler"
+        // type="button"
+        // data-toggle="collapse"
+        // data-target="#navbarSupportedContent"
+        // aria-controls="navbarSupportedContent"
+        // aria-expanded="false"
+        // aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon" />
+          <div className="menu-wrap">
+            <input type="checkbox" className="toggler" />
+            <div className="hamburger">
+              <div></div>
+            </div>
+            <div className="menu">
+              <div>
+                <div>
+                  <LogoIcon width='20%' />
+
+                  <ul className="p-0 my-5">
+                    <li className={`nav-item m44 mx3 sidebarList ${
+                      active === 1 ? "active" : "inactive"
+                      }`} >
+                      <Link href='/'>
+                        <a className="nav-link js-scroll-trigger">
+                          Home
+              </a>
+                      </Link>
+                    </li>
+                    <li className={`nav-item m44 mx3 sidebarList ${
+                      active === 2 ? "active" : "inactive"
+                      }`} >
+                      <Link href='/ncdc'>
+                        <a className="nav-link js-scroll-trigger" >
+                          NCDC
+            </a>
+                      </Link>
+                    </li>
+
+                    <li className={`nav-item m44 mx3 sidebarList ${
+                      active === 3 ? "active" : "inactive"
+                      }`}>
+                      <Link href="/infographics">
+                        <a className="nav-link js-scroll-trigger" >
+                          Infographics
+                  </a>
+                      </Link>
+                    </li>
+                    <li className={`nav-item m44 mx3 sidebarList ${
+                      active === 4 ? "active" : "inactive"
+                      }`} >
+                      <Link href="/news">
+                        <a className="nav-link js-scroll-trigger" >
+                          News
+                  </a>
+                      </Link>
+                    </li>
+                    <li className={`nav-item m44 mx3 sidebarList ${
+                      active === 5 ? "active" : "inactive"
+                      }`} >
+                      <Link href="/faq">
+                        <a className="nav-link js-scroll-trigger" >
+                          FAQs
+                </a>
+                      </Link>
+                    </li>
+
+                  </ul>
+                  <span className='d-block'>
+                    <span className='text-secondary'> adedaniel</span>  <a target="_blank" href="https://github.com/adedaniel"><i className="fa text-secondary fa-github" aria-hidden="true"></i></a>
+              &nbsp; <a target="_blank" href="https://twitter.com/ijebu_developer"><i className="fa text-secondary fa-twitter" aria-hidden="true"></i></a>
+                  </span>
+                  <span className='d-block'>
+                    &nbsp;&nbsp; <span className='text-secondary'> jaywonder20</span> <a target="_blank" href="https://github.com/jaywonder20"><i className="fa text-secondary fa-github" aria-hidden="true"></i></a>
+              &nbsp; <a target="_blank" href="https://twitter.com/jaywonder20"><i className="fa text-secondary fa-twitter" aria-hidden="true"></i></a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -97,10 +170,164 @@ function Header({ siteTitle, active }) {
             </li>
 
           </ul>
+
         </div>
       </div>
       <style jsx>
         {`
+        .m44 {
+margin: 0 20%; 
+display: inline-block !important
+
+        }
+        .Toggler{
+          background: transparent;
+    border: none;
+        }
+        .menu-wrap{
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 2;
+        }
+        
+        .toggler{
+          position: absolute;
+          
+          right: -96vw;
+          width: 55px;
+          height: 55px;
+          z-index: 3;
+          opacity: 0;
+          cursor: pointer;
+        }
+        
+        .hamburger{
+          position: absolute;
+          
+          right: -96vw;
+          width: 55px;
+          height: 55px;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: transparent;
+        }
+        
+        .hamburger>div{
+          position: absolute;
+          width: 60%;
+          height: 3px;
+          border-radius: 1.5px;
+          background-color: ${colors.grey};
+          transition: .4s;
+        }
+        
+        .hamburger>div:before{
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 3px;
+          border-radius: 1.5px;
+          background-color: ${colors.grey};
+          top: -10px;
+          left: 0;
+          transition: .4s;
+        }
+        
+        .hamburger>div:after{
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 3px;
+          border-radius: 1.5px;
+          background-color: ${colors.grey};
+          top: 10px;
+          left: 0;
+          transition: .4s;
+        }
+        
+        .toggler:checked + .hamburger>div{
+          transform: rotate(135deg);
+        }
+        
+        .toggler:checked:hover + .hamburger>div{
+          transform: rotate(225deg);
+        }
+        
+        .toggler:checked + .hamburger>div:before, .toggler:checked + .hamburger>div:after{
+          top: 0;
+          transform: rotate(90deg);
+        }
+        
+        .menu{
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          visibility: hidden;
+          transition: .6s;
+        }
+        
+        .menu > div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-150%) translateY(-50%);
+            width: 1600px;
+            height: 1600px;
+            border-radius: 50%;
+            background-color: ${colors.offWhite};
+            opacity: 0.97;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: .6s;
+        }
+        
+        .menu > div > div{
+          max-width: 90vw;
+          max-height: 100vh;
+          opacity: 0;
+          transition: .6s;
+        }
+        
+        .menu > div > div > ul > li{
+          list-style: none;
+        }
+        
+        .menu > div > div > ul > li > a{
+          text-decoration: none;
+          color: ${colors.grey};
+          font-weight: 550;
+          text-transform: uppercase;
+          margin-top: .5rem;
+          transition: .3s;
+          font-size: x-large;
+          display: inline-block;
+        }
+        
+        .menu > div > div > ul > li > a:hover{
+          color: ${colors.grey};
+        }
+        
+        .toggler:checked ~ .menu{
+          visibility: visible;
+        }
+        
+        .toggler:checked ~ .menu > div{
+          transform: translateX(-50%) translateY(-50%);
+        }
+        
+        .toggler:checked ~ .menu > div > div{
+          opacity: 1;
+        }
+
+
         .nav-link {
           padding: 0 !important;
       }
@@ -108,6 +335,9 @@ function Header({ siteTitle, active }) {
         @media(min-width: 768px){
           .mx3{
             margin: 0 14px
+          }
+          .Toggler{
+            display: none
           }
         }
        
