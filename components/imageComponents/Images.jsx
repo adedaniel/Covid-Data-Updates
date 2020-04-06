@@ -53,3 +53,33 @@ export const LogoIcon = ({ width }) => {
     );
 
 };
+
+export const OfflineIcon = ({ width, margin }) => {
+    return (
+        <>
+            <img src="/images/offline.png?trace" alt="logo" width={width} />
+            <style jsx>{`
+
+            img{
+                margin : ${margin || 'unset'}
+            }
+            `}</style>
+        </>
+    );
+
+};
+
+export const NotFoundIcon = ({ width, margin }) => {
+    return (
+        <>
+            <img src="/images/not-found.png?trace" alt="logo" width={width} />
+            <style jsx>{`
+
+img{
+    margin : ${margin || 'unset'}
+}
+`}</style>
+        </>
+    );
+
+};

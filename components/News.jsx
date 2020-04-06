@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { colors } from './styles/styles'
 import MyContext from "./Context";
 import FadeIn from 'react-fade-in';
+import LoadingAnimation from './LoadingAnimation';
 
 export default function News() {
     const { news, localNews } = useContext(MyContext);
@@ -33,8 +34,8 @@ export default function News() {
                         {
                             localNews.length !== 0 ?
                                 localNews.map((eachNews, index) => (
-                                    <FadeIn>
-                                        <a target='_blank' rel="noopener noreferrer" key={index} href={eachNews.link} className='text-dark text-decoration-none'>
+                                    <FadeIn key={index}>
+                                        <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
                                             <div className="bg-white newsCard my-3">
 
                                                 <div className="row">
@@ -55,12 +56,15 @@ export default function News() {
                                         </a>
                                     </FadeIn>
                                 ))
-                                : <div className='text-center w-100 mt-4'>
-                                    <div className="spinner-grow colorPrimary  text-center" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
+                                :
+                                // <div className='text-center w-100 mt-4'>
+                                //     <div className="spinner-grow colorPrimary  text-center" role="status">
+                                //         <span className="sr-only">Loading...</span>
+                                //     </div>
+                                // </div>
+                                <div className="vh-100">
+                                    <LoadingAnimation />
                                 </div>
-
                         }
 
 
@@ -70,8 +74,8 @@ export default function News() {
                             news.length !== 0 ?
 
                                 internationalPostsToDisplay.map((eachNews, index) => (
-                                    <FadeIn>
-                                        <a target='_blank' rel="noopener noreferrer" key={index} href={eachNews.link} className='text-dark text-decoration-none'>
+                                    <FadeIn key={index}>
+                                        <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
                                             <div className="bg-white newsCard py-3 px-4 my-3">
                                                 <h4 className='m-0'>{eachNews.title}</h4>
                                                 <small className='m-0 textGrey'>{eachNews.published}</small>
@@ -84,10 +88,8 @@ export default function News() {
                                         </a>
                                     </FadeIn>
                                 ))
-                                : <div className='text-center w-100 mt-4'>
-                                    <div className="spinner-grow colorPrimary  text-center" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
+                                : <div className="vh-100">
+                                    <LoadingAnimation />
                                 </div>
                         }
                         <div className="col-md-12 mt-5">
