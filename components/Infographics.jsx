@@ -221,7 +221,7 @@ export default function Infographics() {
                 <div className="">
                     <small className='infoText'>
                         All figures here are gotten from
-                        the COVID-19 Map - Johns Hopkins Coronavirus Resource Center.
+                        the Johns Hopkins Coronavirus Resource Center.
 </small>
                 </div>
 

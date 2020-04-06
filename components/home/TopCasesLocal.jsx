@@ -7,48 +7,49 @@ import LoadingAnimation from '../LoadingAnimation';
 
 export default function TopCasesLocal() {
   const { ncdc } = useContext(MyContext);
-  // console.log(ncdc.Numbers);
-  const cases = [];
-  if (Object.entries(ncdc).length !== 0) {
+  // console.log(ncdc);
+  // const cases = [];
+  // if (ncdc.length !== 0) {
+  //   console.log(ncdc);
+  //   // var list = ncdc.Numbers;
+  //   // // console.log(list);
+  //   // // Reverse sorting on key
+  //   // const keysSorted = Object.values(list).sort(function (a, b) { return b - a })
+  //   // // console.log(keysSorted);
 
-    var list = ncdc.Numbers;
-    // console.log(list);
-    // Reverse sorting on key
-    const keysSorted = Object.values(list).sort(function (a, b) { return b - a })
-    // console.log(keysSorted);
 
+  //   // // Adding the sorted result to an array of object
+  //   // for (let i = 0; i < keysSorted.length; i++) {
+  //   //   const obj = {};
+  //   //   obj.val = keysSorted[i];
+  //   //   obj.id = Object.keys(list)[Object.values(list).indexOf(keysSorted[i])];
+  //   //   cases.push(obj);
+  //   // }
 
-    // Adding the sorted result to an array of object
-    for (let i = 0; i < keysSorted.length; i++) {
-      const obj = {};
-      obj.val = keysSorted[i];
-      obj.id = Object.keys(list)[Object.values(list).indexOf(keysSorted[i])];
-      cases.push(obj);
-    }
-
-    // console.log(cases);
-    // setCasesArray(cases)
-  }
+  //   // console.log(cases);
+  //   // setCasesArray(cases)
+  // }
 
   return (
     <>
-      {cases.length !== 0 ?
-        cases.splice(0, 6).map((eachCase, index) => (
-          <div key={index} className="col-sm-2">
-            <div className="topLocalCase mb-3">
-              <FadeIn>
-                <h1 className='caseNumber colorPrimary'>{eachCase.val}</h1>
+      {
+        ncdc.length !== 0 ?
+          ncdc.slice(0, 6).map((eachCase, index) => (
+            <div key={index} className="col-sm-2">
+              <div className="topLocalCase mb-3">
+                <FadeIn>
+                  <h1 className='caseNumber colorPrimary'>{eachCase[1]}</h1>
 
-                <h4 className='caseState colorPrimary'>{ncdc.States[eachCase.id]}</h4>
-              </FadeIn>
+                  <h4 className='caseState colorPrimary'>{eachCase[0]}</h4>
+                </FadeIn>
+              </div>
             </div>
-          </div>
-        ))
-        :
+          ))
+          :
 
-        <div className='text-center w-100'>
-          <LoadingAnimation />
-        </div>
+          <div className='text-center w-100'>
+            <LoadingAnimation />
+          </div>
       }
       <style jsx>{`
         .caseNumber{

@@ -31,7 +31,7 @@ export default function TopCasesInternational() {
                             <FadeIn>
                                 <h3 className='caseNumber colorPrimary'>{eachCase.TotalConfirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                <span> <img src={`https://www.countryflags.io/${eachCase.flag}/shiny/32.png`} /></span> <span>&nbsp;  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
+                                <span> <img src={`https://www.countryflags.io/${eachCase.flag}/shiny/32.png`} />&nbsp;</span> <span>  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
                             </FadeIn>
                         </div>
                     </div>
@@ -69,6 +69,11 @@ export default function TopCasesInternational() {
                       0 1px 6px rgba(0, 0, 0, 0.04);
                     }
               }
+              @media(max-width: 1229px){
+                .dNone{
+                    display: none
+                  }
+            }
               .colorPrimary {
                 color: ${colors.primary};
               }

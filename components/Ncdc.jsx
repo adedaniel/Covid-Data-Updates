@@ -6,13 +6,9 @@ import LoadingAnimation from './LoadingAnimation';
 export default function Ncdc() {
   const { ncdc, ncdcPresent, summary } = useContext(MyContext);
   // console.log(ncdc.Numbers);
-  let cases = [];
-  let numbers;
   var nigeriaData = [];
-  if (Object.entries(ncdc).length !== 0) {
-    var list = ncdc.States;
-    cases = Object.values(list)
-    numbers = ncdc.Numbers
+  if (ncdc.length !== 0) {
+
     nigeriaData = summary.filter(obj => {
       return obj.Country === 'Nigeria'
     })
@@ -55,19 +51,17 @@ export default function Ncdc() {
           <tbody>
 
             {
-              summary.length !== 0 ?
-                cases.map((eachState, index) => (
+              ncdc.length !== 0 ?
+                ncdc.slice(0, (ncdc.length - 1)).map((eachState, index) => (
                   <tr key={index} className='d-flex'>
-                    <td className='text-center w-50 float-left d-inherit'>{eachState}</td>
-                    <td className='text-center w-50 float-right'>{numbers[index]}</td>
+                    <td className='text-center w-50 float-left d-inherit'>{eachState[0]}</td>
+                    <td className='text-center w-50 float-right'>{eachState[1]}</td>
                   </tr>
                 ))
                 :
-
                 <div className='text-center w-100 mt-4'>
                   <LoadingAnimation />
                 </div>
-
             }
           </tbody>
         </table>

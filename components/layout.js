@@ -1,12 +1,20 @@
 
-import React from "react"
+import React, { useEffect } from "react"
 import Footer from "./footer"
 import Header from "./header"
 import { colors } from "./styles/styles";
 const config = require("../data/config")
+import { initGA, logPageView } from "./googleAnalytics.js"
 
-const Layout = ({ children, active }) => {
 
+function Layout({ children, active }) {
+  useEffect(() => {
+    if (!window.GA_INITIALIZED) {
+      initGA()
+      window.GA_INITIALIZED = true
+    }
+    logPageView()
+  }, [])
   return (
     <>
       <Header siteTitle={config.defaultTitle} active={active} />
