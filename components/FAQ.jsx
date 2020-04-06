@@ -575,6 +575,18 @@ export default function FAQS() {
         }
 
       }
+      @media(max-width: 535px){
+        .question{
+        width: 91% !important;
+        float: left
+        }
+      }
+      @media(max-width: 459px){
+        .question{
+        width: 92% !important;
+        float: left
+        }
+      }
       .captionArea {
         display: table-cell;
         vertical-align: middle;

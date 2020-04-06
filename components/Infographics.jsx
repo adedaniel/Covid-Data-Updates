@@ -85,7 +85,7 @@ export default function Infographics() {
                                         fontSize: '20', // 12, 18 whatever you want (don't specify px)
 
                                     },
-                                    pointSize: 6,
+                                    pointSize: 7,
                                     animation: {
                                         startup: true,
                                         easing: 'linear',
@@ -216,8 +216,15 @@ export default function Infographics() {
                 </div>
                 <div className="infoWrapper">
 
-                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the table to view the rest of the fields</small>
+                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the table to view the rest of the fields. </small>
                 </div>
+                <div className="">
+                    <small className='infoText'>
+                        All figures here are gotten from
+                        the COVID-19 Map - Johns Hopkins Coronavirus Resource Center.
+</small>
+                </div>
+
             </div>
 
             <style jsx>

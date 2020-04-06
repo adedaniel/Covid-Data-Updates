@@ -8,7 +8,7 @@ export default function News() {
     const { news, localNews } = useContext(MyContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [localPage, setLocalPage] = useState(1);
-    console.log(localNews);
+    // console.log(localNews);
     let indexOfLastPost = currentPage * 20;
     let indexOfFirstPost = indexOfLastPost - 20;
     // console.log(indexOfFirstPost, indexOfLastPost);
