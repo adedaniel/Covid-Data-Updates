@@ -14,7 +14,7 @@ export default function Summary() {
           <br /><br />
 Just Today, <strong>{all.todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong> have already tested positive for the virus and <strong>{all.todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong> died today.
 
-            <br /> <br /> Based on our statistics, <strong>{all.casesPerOneMillion.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong> people out of every million have been infected and <strong>{Math.round(all.deathsPerOneMillion)}</strong> out of every one million people in the world have died of the virus.
+            <br /> <br /> Based on our statistics, <strong>{all.casesPerOneMillion.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong> people out of every million have been infected and about <strong>{Math.round(all.deathsPerOneMillion)}</strong> out of every one million people in the world have died of the virus.
           </h5>
         </>
         :

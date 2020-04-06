@@ -66,7 +66,7 @@ export default function Home() {
             <h1 className="colorPrimary">Trending Words</h1>
             <h5>We have been able to fetch the most used words related to the virus based on their numbers of appearance on social media.<br />
 
-           Larger words indicate more frequent use and smaller ones indicate less frequent use.
+           Larger words indicate more frequent use and the smaller ones indicate less frequent use.
            <br /><br />
            Zoom in and take a look</h5>
             <div className=" mt-5">

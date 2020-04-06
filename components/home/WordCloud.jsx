@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import MyContext from "../Context";
 import { colors } from '../styles/styles'
+import LoadingAnimation from '../LoadingAnimation';
 
 export default function WordCloud() {
     const { wordCloud } = useContext(MyContext);
@@ -13,9 +14,7 @@ export default function WordCloud() {
 
 
                 <div className='text-center w-100'>
-                    <div className="spinner-grow colorPrimary  text-center" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>
+                    <LoadingAnimation />
                 </div>
             }
             <style jsx>{`

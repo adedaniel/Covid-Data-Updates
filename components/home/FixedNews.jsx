@@ -3,6 +3,7 @@ import { colors } from '../styles/styles'
 import Link from "next/link"
 import MyContext from "../Context";
 import FadeIn from 'react-fade-in';
+import LoadingAnimation from '../LoadingAnimation';
 export default function FixedNews() {
   const { news } = useContext(MyContext);
   // const [news, setNews] = useState([])
@@ -44,11 +45,7 @@ export default function FixedNews() {
             ))
             :
 
-            <div className='text-center w-100'>
-              <div className="spinner-grow colorPrimary  text-center" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
+            <LoadingAnimation />
 
         }
       </div>

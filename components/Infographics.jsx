@@ -4,6 +4,7 @@ import Chart from "react-google-charts";
 import MyContext from "./Context";
 import { CountriesIcon, FineIcon, GoneIcon, ConfirmedIcon } from "./imageComponents/Images";
 import FadeIn from 'react-fade-in';
+import LoadingAnimation from './LoadingAnimation';
 
 export default function Infographics() {
     const [country, setCountry] = useState('Nigeria')
@@ -64,9 +65,7 @@ export default function Infographics() {
                                 chartType="LineChart"
                                 loader={
                                     <div className='text-center'>
-                                        <div className="spinner-grow colorPrimary text-center" role="status">
-                                            <span className="sr-only">Loading...</span>
-                                        </div>
+                                        <LoadingAnimation />
                                     </div>
                                 }
                                 data={nationalStates
@@ -163,9 +162,7 @@ export default function Infographics() {
                                 </div>
                             </>
                             : <div className='text-center w-100 mt-4'>
-                                <div className="spinner-grow colorPrimary  text-center" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div>
+                                <LoadingAnimation />
                             </div>
 
 
@@ -210,9 +207,7 @@ export default function Infographics() {
                                     ))
                                     :
                                     <div className='text-center w-100 mt-4'>
-                                        <div className="spinner-grow colorPrimary  text-center" role="status">
-                                            <span className="sr-only">Loading...</span>
-                                        </div>
+                                        <LoadingAnimation />
                                     </div>
 
                             }
