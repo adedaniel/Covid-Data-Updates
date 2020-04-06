@@ -135,7 +135,7 @@ export default function Home() {
             <h1 className=' colorPrimary'>Got a Question?</h1>
             <h5 className='text-center mt-5 mb-4'>How it all started? Signs and symptoms? How to stay safe?</h5>
             <Link href='/faq'>
-              <OutlineButton text='Ask Anything' width='370px' padding='10px 0' font='larger' />
+              <OutlineButton text='Ask Anything' width='335px' padding='10px 0' font='larger' />
             </Link>
           </div>
 
