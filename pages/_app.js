@@ -16,13 +16,24 @@ export default class MyApp extends App {
     summary: [],
     timeSeries: {},
     wordCloud: "",
-    all: {}
+    all: {},
+    ncdcPresent: {}
   };
   componentDidMount() {
     Axios.get(
       URL + "/ncdc"
     ).then((result) => {
       this.setState({ ncdc: JSON.parse(result.data.data) })
+      // console.log(result.data.data);
+      // console.log("fetched");
+    }).catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
+    Axios.get(
+      URL + "/ncdcpresent"
+    ).then((result) => {
+      this.setState({ ncdcPresent: result.data.data })
       // console.log(result.data.data);
       // console.log("fetched");
     }).catch(errors => {
@@ -130,7 +141,8 @@ export default class MyApp extends App {
             ncdc: this.state.ncdc,
             timeSeries: this.state.timeSeries,
             all: this.state.all,
-            wordCloud: this.state.wordCloud
+            wordCloud: this.state.wordCloud,
+            ncdcPresent: this.state.ncdcPresent
           }}
         >
 

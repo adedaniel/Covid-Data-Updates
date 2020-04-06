@@ -4,7 +4,7 @@ import MyContext from "./Context";
 import LoadingAnimation from './LoadingAnimation';
 
 export default function Ncdc() {
-  const { ncdc, summary } = useContext(MyContext);
+  const { ncdc, ncdcPresent, summary } = useContext(MyContext);
   // console.log(ncdc.Numbers);
   let cases = [];
   let numbers;
@@ -25,15 +25,15 @@ export default function Ncdc() {
       </h1>
 
       {
-        Object.entries(ncdc).length !== 0 ?
+        Object.entries(ncdcPresent).length !== 0 ?
 
-          nigeriaData.map((eachData, index) => (
-            <div key={index}>
-              <h1 className="colorPrimary mt-4">Presently,</h1>
-              <h5>There are <strong>{eachData.TotalConfirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{eachData.TotalRecovered}</strong> of them have recovered and <strong>{eachData.TotalDeaths}</strong> have died.</h5>
 
-            </div>
-          ))
+          <div>
+            <h1 className="colorPrimary mt-4">Presently,</h1>
+            <h5>There are <strong>{ncdcPresent.confirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{ncdcPresent.recovered}</strong> of them have recovered and <strong>{ncdcPresent.deaths}</strong> have died.</h5>
+
+          </div>
+
           : <h4>Hold on a second...</h4>
       }
       <h1 className="colorPrimary mb-2 mt-5"> <span>
