@@ -71,7 +71,7 @@ export default function FAQS() {
         {
           isLoading === false && isFetched && answers.length !== 0 ?
             <>
-              <h4 className=' my-4'>Showing most relevant answers for '{storedQuestion}' </h4>
+              <h4 className='my-4'>Showing most relevant answers for '{storedQuestion}' </h4>
               {
                 answers.slice(0, 5).map((eachAnswer, index) => (
                   <FadeIn key={index}>
@@ -81,7 +81,6 @@ export default function FAQS() {
                       <h5>
                         {eachAnswer.answer.replace(/^(.{200}[^\s]*).*/, "$1")}...{' '}
                         <a target='_blank' rel="noopener noreferrer" href={eachAnswer.meta.link} className='text-dark text-decoration-none'>
-
                           <span className='newsLink text-decoration-none'>Read More</span>
                         </a>
                       </h5>
@@ -566,14 +565,10 @@ export default function FAQS() {
         }
 
         .search{
-
           width: 15%;
           float: left;
           margin-top: 14px;
-        
-  
         }
-
       }
       @media(max-width: 535px){
         .question{
@@ -594,7 +589,10 @@ export default function FAQS() {
       .bgImage{
         background-color:  ${colors.primary};
         height: 400px;
-        width: 100%
+        background-image: url('/images/doctor.png?trace');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      width: 100%
       }
     .colorPrimary {
       color: ${colors.primary} !important;
