@@ -42,9 +42,10 @@ export const OutlineButton = ({
   onClick,
   borderRadius,
   font,
+  ref
 }) => {
   return (
-    <button type="button" className="btn bgOutlineButton" onClick={onClick}>
+    <button ref={ref} type="button" className="btn bgOutlineButton" onClick={onClick}>
       {children || text}
       <style jsx>
         {`
@@ -60,6 +61,7 @@ export const OutlineButton = ({
             font-size: ${font || "initial"};
             width: ${width || "inherit"};
             background-color: transparent;
+            transition: all 0.5s;
           }
           .bgOutlineButton:hover {
             color: ${colors.white};

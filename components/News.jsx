@@ -9,14 +9,15 @@ export default function News() {
     const [currentPage, setCurrentPage] = useState(1);
     const [localPage, setLocalPage] = useState(1);
     // console.log(localNews);
-    let indexOfLastPost = currentPage * 20;
-    let indexOfFirstPost = indexOfLastPost - 20;
+    let indexOfLastPost = currentPage * 10;
+    let indexOfFirstPost = indexOfLastPost - 10;
     // console.log(indexOfFirstPost, indexOfLastPost);
+    let indexOfLastLocalPost = localPage * 10;
+    let indexOfFirstLocalPost = indexOfLastLocalPost - 10;
 
-    let localPostsToDisplay = localNews.slice(indexOfFirstPost, indexOfLastPost)
+    let localPostsToDisplay = localNews.slice(indexOfFirstLocalPost, indexOfLastLocalPost)
     let internationalPostsToDisplay = news.slice(indexOfFirstPost, indexOfLastPost)
     // console.log(internationalPostsToDisplay);
-
     return (
         <>
             <div className="container pt-3 mb-5">
@@ -33,13 +34,15 @@ export default function News() {
                     <div className="tab-pane fade show active" id="nav-local" role="tabpanel" aria-labelledby="nav-local-tab">
                         {
                             localNews.length !== 0 ?
-                                localNews.map((eachNews, index) => (
+                                localPostsToDisplay.map((eachNews, index) => (
                                     <FadeIn key={index}>
                                         <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
                                             <div className="bg-white newsCard my-3">
 
                                                 <div className="row">
-                                                    <div className="col-sm-2 borderRadius bgImage" style={{ backgroundImage: `url(${eachNews.image})`, backgroundSize: "cover" }}>
+                                                    <div className="col-sm-2 respPadding">
+                                                        <div className=" borderRadius bgImage" style={{ backgroundImage: `url(${eachNews.image})`, backgroundSize: "cover" }}>
+                                                        </div>
                                                     </div>
                                                     <div className="col-sm-10 summary py-3">
                                                         <h4 className='m-0'>{eachNews.title}</h4>
@@ -67,6 +70,48 @@ export default function News() {
                                 </div>
                         }
 
+                        <div className="col-md-12 mt-5">
+
+                            <nav className='navigation' aria-label=" navigation ">
+                                <ul className="pagination ">
+                                    <li className={`page-item ${
+                                        localPage === 1 ? "disabled" : ""
+                                        }`}>
+                                        <a className="page-link" onClick={() => setLocalPage(localPage - 1)} href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span className="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li className={`page-item ${
+                                        localPage === 1 ? "active" : "inactive"
+                                        }`}><a className="page-link" onClick={() => setLocalPage(1)} href="#">1 <span className="sr-only">(current)</span></a></li>
+                                    <li className={`page-item ${
+                                        localPage === 2 ? "active" : "inactive"
+                                        }`}><a className="page-link" onClick={() => setLocalPage(2)} href="#">2</a></li>
+                                    <li className={`page-item ${
+                                        localPage === 3 ? "active" : "inactive"
+                                        }`}><a className="page-link" onClick={() => setLocalPage(3)} href="#">3</a></li>
+                                    <li className={`page-item ${
+                                        localPage === 4 ? "active" : "inactive"
+                                        }`}><a className="page-link" onClick={() => setLocalPage(4)} href="#">4</a></li>
+                                    <li className={`page-item ${
+                                        localPage === 5 ? "active" : "inactive"
+                                        }`}><a className="page-link" onClick={() => setLocalPage(5)} href="#">5</a></li>
+
+
+                                    <li className={`page-item ${
+                                        localPage === 5 ? "disabled" : ""
+                                        }`}>
+                                        <a className="page-link" onClick={() => setLocalPage(localPage + 1)} href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span className="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
 
                     </div>
                     <div className="tab-pane fade" id="nav-international" role="tabpanel" aria-labelledby="nav-international-tab">
@@ -139,6 +184,7 @@ export default function News() {
                 </div>
             </div>
             <style jsx>{`
+            
             .colorPrimary {
                 color: ${colors.primary};
               }
@@ -165,10 +211,16 @@ export default function News() {
               .pointer{
                 cursor: pointer
               }
+              .bgImage{
+                height: 100%;
+            }
 @media(max-width:575px){
     .bgImage{
         height: 140px;
 margin: 0 15px;
+    }
+    .respPadding{
+        padding: 0
     }
               .borderRadius{
                 border-radius: 10px 10px 0 0px !important;

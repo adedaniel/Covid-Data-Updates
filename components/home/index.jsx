@@ -1,15 +1,13 @@
 import React from "react";
 import { colors } from "../styles/styles";
 import { DefaultButton, OutlineButton } from "../button";
-
 import FixedNews from "./FixedNews";
-
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import TopCasesLocal from "./TopCasesLocal";
 import TopCasesInternational from "./TopCasesInternational";
-import { DoctorIcon } from "../imageComponents/Images";
 import Summary from "./Summary";
 import WordCloud from "./WordCloud";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -131,7 +129,17 @@ export default function Home() {
           </div>
 
         </div>
+        <div>
+          <div className="container text-center py-5 mb-5">
 
+            <h1 className=' colorPrimary'>Got a Question?</h1>
+            <h5 className='text-center mt-5 mb-4'>How it all started? Signs and symptoms? How to stay safe?</h5>
+            <Link href='/faq'>
+              <OutlineButton text='Ask Anything' width='370px' padding='10px 0' font='larger' />
+            </Link>
+          </div>
+
+        </div>
 
       </div>
       <div className="fixed-news leftBorder py-4 px-3">
