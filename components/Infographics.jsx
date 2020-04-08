@@ -8,6 +8,8 @@ import LoadingAnimation from './LoadingAnimation';
 
 export default function Infographics() {
     const [country, setCountry] = useState('Nigeria')
+    const [sortAscending, setSortAscending] = useState(true)
+    const [sortValue, setsortValue] = useState('Country')
     const { timeSeries, summary, all } = useContext(MyContext);
     let nationalStates = [['Days', 'Confirmed', 'Deaths', 'Recovered']];
     let countriesNames;
@@ -32,8 +34,38 @@ export default function Infographics() {
 
         // console.log(nationalStates);
     }
+    let summaryToDisplay = [...summary]
+    function compareValues(key, order = 'asc') {
+        return function innerSort(a, b) {
+            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                // property doesn't exist on either object
+                return 0;
+            }
 
+            const varA = (typeof a[key] === 'string')
+                ? a[key].toUpperCase() : a[key];
+            const varB = (typeof b[key] === 'string')
+                ? b[key].toUpperCase() : b[key];
 
+            let comparison = 0;
+            if (varA > varB) {
+                comparison = 1;
+            } else if (varA < varB) {
+                comparison = -1;
+            }
+            return (
+                (order === 'desc') ? (comparison * -1) : comparison
+            );
+        };
+    }
+
+    const sortSummary = (value) => {
+
+        setsortValue(value);
+        setSortAscending(!sortAscending)
+
+    }
+    // console.log([...summary].sort(compareValues('Country', 'desc')));
     return (
         <div>
             <div className='container pt-3 mb-5'>
@@ -107,8 +139,8 @@ export default function Infographics() {
                         </>
                         : ""}
                 </div>
-                <div className="infoWrapper">
-                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the chart to view the rest of the information</small>
+                <div className='container'>
+                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can <span className="infoWrapper"> scroll horizontally through the chart to view the rest of the information or </span>touch any of the dots to check stats for each day</small>
                 </div>
                 <div className="container my-5">
                     <div className="row">
@@ -181,22 +213,22 @@ export default function Infographics() {
                     <table className="fixed_headers table-hover searchable sortable">
                         <thead className="thead-light tHead">
                             <tr>
-                                <th className='countries padd' scope="col">Country</th>
-                                <th className='text-center newConfirmed' scope="col">New Confirmed</th>
-                                <th className='text-center newConfirmed' scope="col">New Recovered</th>
-                                <th className='text-center newConfirmed' scope="col">New Deaths</th>
-                                <th className='text-center newConfirmed' scope="col">Total Confirmed</th>
-                                <th className='text-center newConfirmed' scope="col">Total Recovered</th>
-                                <th className='text-center newConfirmed' scope="col">Total Deaths</th>
+                                <th className='countries padd' scope="col" onClick={() => sortSummary('Country')}>Country &nbsp; <i className={`fa fa-angle-${sortValue === 'Country' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('NewConfirmed')}>New Confirmed &nbsp; <i className={`fa fa-angle-${sortValue === 'NewConfirmed' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('NewRecovered')}>New Recovered &nbsp; <i className={`fa fa-angle-${sortValue === 'NewRecovered' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center w174' scope="col" onClick={() => sortSummary('NewDeaths')}>New Deaths &nbsp; <i className={`fa fa-angle-${sortValue === 'NewDeaths' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('TotalConfirmed')}>Total Confirmed &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalConfirmed' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center w202' scope="col" onClick={() => sortSummary('TotalRecovered')}>Total Recovered &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalRecovered' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                <th className='text-center w174' scope="col" onClick={() => sortSummary('TotalDeaths')}>Total Deaths &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalDeaths' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 summary.length !== 0 ?
-                                    summary.map((eachCountry, index) => (
+                                    summaryToDisplay.sort(compareValues(sortValue, sortAscending ? 'asc' : 'desc')).map((eachCountry, index) => (
                                         <tr key={index}>
                                             <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
-                                            <td className='text-center newConfirmed'> {eachCountry.NewConfirmed}</td>
+                                            <td className=' new'> {eachCountry.NewConfirmed}</td>
                                             <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
                                             <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
                                             <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
@@ -229,10 +261,22 @@ export default function Infographics() {
 
             <style jsx>
                 {`
+             
+                .w174{
+                    width: 174px !important
+                }
+                .w202{
+                    width: 202px !important
+                }
                 @media(min-width: 992px){
                     .infoWrapper{
-display: none
+                        display: none
                     }
+                    .fixed_headers th{
+                        padding: 15px 16px !important;
+                    
+                      }
+                      
                 }
                 .infoText{
                     font-size: 54%
@@ -272,7 +316,7 @@ display: none
 
 .fixed_headers th{
     padding: 15px 17px;
-
+cursor: pointer;
 width: 180px   
   }
 .fixed_headers td {
@@ -304,7 +348,7 @@ width: 180px
 
 
 .tableContainer{
-    height: 600px;
+    height: 630px;
     overflow: auto
 }
 table {
@@ -319,6 +363,9 @@ table {
                  .scroll{
                      overflow-x: scroll
                  }
+                 .new{
+                    text-align: left !important
+                }
              }
                   select {
                    
