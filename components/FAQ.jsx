@@ -102,7 +102,6 @@ export default function FAQS() {
         {
           isLoading === false && hasError === true && answers.length === 0 ?
             <>
-              <OfflineIcon width='40%' margin='0 29%' />
               <h4 className="text-center">No internet connection. Check your connection and try again</h4>
             </>
             : ""
