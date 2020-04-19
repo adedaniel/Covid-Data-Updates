@@ -28,6 +28,8 @@ export default class MyApp extends App {
       // console.log("fetched");
     }).catch(errors => {
       // react on errors.
+      this.setState({ ncdc: errors })
+
       console.error(errors);
     });
     Axios.get(
@@ -38,6 +40,8 @@ export default class MyApp extends App {
       // console.log("fetched");
     }).catch(errors => {
       // react on errors.
+      this.setState({ ncdcPresent: errors })
+
       console.error(errors);
     });
     Axios.get(
@@ -47,6 +51,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ news: errors })
+
       console.error(errors);
     });
     Axios.get(
@@ -56,6 +62,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ localNews: errors })
+
       console.error(errors);
     });
 
@@ -66,6 +74,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ summary: errors })
+
       console.error(errors);
     });
 
@@ -76,6 +86,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ timeSeries: errors })
+
       console.error(errors);
     });
     Axios.get(
@@ -85,6 +97,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ all: errors })
+
       console.error(errors);
     });
 
@@ -95,6 +109,8 @@ export default class MyApp extends App {
       // console.log(result.data.data);
     }).catch(errors => {
       // react on errors.
+      this.setState({ wordCloud: errors })
+
       console.error(errors);
     });
 

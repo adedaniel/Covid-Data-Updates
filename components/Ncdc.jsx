@@ -2,16 +2,37 @@ import React, { useContext, useState } from 'react'
 import { colors } from './styles/styles'
 import MyContext from "./Context";
 import LoadingAnimation from './LoadingAnimation';
+import ErrorMessage from './ErrorMessage';
 
 export default function Ncdc() {
+  const [sortAscending, setSortAscending] = useState(false)
+  const [sortValue, setsortValue] = useState(1)
+
   const { ncdc, ncdcPresent, summary } = useContext(MyContext);
   // console.log(ncdc.Numbers);
+  function Comparator(a, b) {
+    // console.log(typeof a[2]);
+    return (
+      sortValue === 0 ?
+
+        sortAscending ? a[sortValue].localeCompare(b[sortValue]) : b[sortValue].localeCompare(a[sortValue])
+        :
+        sortAscending ? a[sortValue] - b[sortValue] : b[sortValue] - a[sortValue]
+    )
+  }
+
   var nigeriaData = [];
-  if (ncdc.length !== 0) {
+  if (ncdc.length !== 0 && !(ncdc instanceof Error)) {
 
     nigeriaData = summary.filter(obj => {
       return obj.Country === 'Nigeria'
     })
+  }
+  const sortNCDC = (value) => {
+
+    setsortValue(value);
+    setSortAscending(!sortAscending)
+
   }
 
   return (
@@ -19,59 +40,67 @@ export default function Ncdc() {
       <h1 className='mb-4'>
         <span className="hoverEffect">NCDC Information</span>
       </h1>
+      {ncdc instanceof Error ?
+        <ErrorMessage />
+        :
+        <>
+          {
 
-      {
-        Object.entries(ncdcPresent).length !== 0 ?
+            Object.entries(ncdcPresent).length !== 0 ?
+              <div>
+                <h1 className="colorPrimary mt-4">Presently,</h1>
+                <h5>There are <strong>{ncdcPresent.confirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{ncdcPresent.recovered}</strong> of them have recovered and <strong>{ncdcPresent.deaths}</strong> have died.</h5>
+
+              </div>
+              : <h4>Hold on a second...</h4>
+          }
+          <h1 className="colorPrimary mb-2 mt-5"> <span>
+            {nigeriaData.map((eachData, index) => (
+              <img key={index} src={`https://www.countryflags.io/${eachData.flag}/shiny/64.png`} />
+            ))}
+          </span> Nigeria's Stats</h1>
+
+          <div className="tableContainer ">
+
+            <table className="fixed_headers d-inline-grid w-100 table-hover searchable sortable">
+              <thead className="thead-light tHead">
+                <tr>
+                  {['State', 'Confirmed Cases', 'Active Cases', 'Recovered Cases', 'Death Cases'].map((title, index) => (
+                    <th key={index} className='text-center' scope="col" onClick={() => sortNCDC(index)}>{title} &nbsp; <i className={`fa fa-angle-${sortValue === index ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                  ))}
 
 
-          <div>
-            <h1 className="colorPrimary mt-4">Presently,</h1>
-            <h5>There are <strong>{ncdcPresent.confirmed}</strong> people in Nigeria who have come in contact with the virus. <strong>{ncdcPresent.recovered}</strong> of them have recovered and <strong>{ncdcPresent.deaths}</strong> have died.</h5>
+                </tr>
+              </thead>
+              <tbody>
+
+                {
+                  ncdc.length !== 0 ?
+                    ncdc.slice(0, (ncdc.length - 1)).sort(Comparator).map((eachState, index) => (
+                      <tr key={index} className='d-flex'>
+                        <td className='text-center d-inherit'>{eachState[0]}</td>
+                        <td className='text-center'>{eachState[1]}</td>
+                        <td className='text-center'>{eachState[2]}</td>
+                        <td className='text-center'>{eachState[3]}</td>
+                        <td className='text-center'>{eachState[4]}</td>
+                      </tr>
+                    ))
+                    :
+                    <div className='text-center w-100 mt-4'>
+                      <LoadingAnimation />
+                    </div>
+                }
+              </tbody>
+            </table>
 
           </div>
-
-          : <h4>Hold on a second...</h4>
+          <div className="infoWrapper">
+            <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>All figures here are gotten from the Nigeria Centre for Disease Control (NCDC).</small>
+          </div>
+        </>
       }
-      <h1 className="colorPrimary mb-2 mt-5"> <span>
-        {nigeriaData.map((eachData, index) => (
-          <img key={index} src={`https://www.countryflags.io/${eachData.flag}/shiny/64.png`} />
-        ))}
-      </span> Nigeria's Stats</h1>
-
-      <div className="tableContainer ">
-
-        <table className="fixed_headers w-100 table-hover searchable sortable">
-          <thead className="thead-light tHead">
-            <tr>
-              <th className='text-center w-50 float-left d-inherit' scope="col">State</th>
-              <th className='text-center w-50 float-right' scope="col">Confirmed Cases</th>
-
-            </tr>
-          </thead>
-          <tbody>
-
-            {
-              ncdc.length !== 0 ?
-                ncdc.slice(0, (ncdc.length - 1)).map((eachState, index) => (
-                  <tr key={index} className='d-flex'>
-                    <td className='text-center w-50 float-left d-inherit'>{eachState[0]}</td>
-                    <td className='text-center w-50 float-right'>{eachState[1]}</td>
-                  </tr>
-                ))
-                :
-                <div className='text-center w-100 mt-4'>
-                  <LoadingAnimation />
-                </div>
-            }
-          </tbody>
-        </table>
-
-      </div>
-      <div className="infoWrapper">
-        <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>All figures here are gotten from the Nigeria Centre for Disease Control (NCDC).</small>
-      </div>
-
       <style jsx>{`
+     
             .infoText{
               font-size: 54%
           }
@@ -110,13 +139,14 @@ export default function Ncdc() {
 
 .fixed_headers th{
     padding: 15px 17px;
-
-width: 180px   
+cursor: pointer;
+display: inline-block;
+    width: 20%;
   }
 .fixed_headers td {
     padding: 15px 21px;
 
-    width: 180px
+    width: 20%;
 }
 
 .fixed_headers thead {
@@ -138,7 +168,17 @@ width: 180px
   background-color: ${colors.offWhite};
 }
 
-
+@media(max-width: 576px){
+  .fixed_headers thead tr {
+    width: 600px
+  }
+  .fixed_headers thead {
+   display: inherit
+  }
+  .fixed_headers tbody {
+    width: 600px
+}
+}
 
 
 .tableContainer{

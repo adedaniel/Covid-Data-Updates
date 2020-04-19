@@ -3,6 +3,7 @@ import { colors } from '../styles/styles'
 import MyContext from "../Context";
 import FadeIn from "react-fade-in";
 import LoadingAnimation from '../LoadingAnimation';
+import ErrorMessage from '../ErrorMessage';
 
 
 export default function TopCasesInternational() {
@@ -10,7 +11,7 @@ export default function TopCasesInternational() {
     // console.log(summary);
 
     let cases = [];
-    if (summary.length !== 0) {
+    if (summary.length !== 0 && !(summary instanceof Error)) {
 
         cases = [...summary].sort(function (a, b) {
             return b.TotalConfirmed - a.TotalConfirmed;
@@ -24,24 +25,28 @@ export default function TopCasesInternational() {
 
     return (
         <>
-            {summary.length !== 0 ?
-                arrangedCase.map((eachCase, index) => (
-                    <div key={index} className="col-sm-3">
-                        <div className="topCase mb-3">
-                            <FadeIn>
-                                <h3 className='caseNumber colorPrimary'>{eachCase.TotalConfirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+            {
+                summary instanceof Error ?
+                    <ErrorMessage />
+                    :
+                    summary.length !== 0 ?
+                        arrangedCase.map((eachCase, index) => (
+                            <div key={index} className="col-sm-3">
+                                <div className="topCase mb-3">
+                                    <FadeIn>
+                                        <h3 className='caseNumber colorPrimary'>{eachCase.TotalConfirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                <span> <img src={`https://www.countryflags.io/${eachCase.flag}/shiny/32.png`} />&nbsp;</span> <span>  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
-                            </FadeIn>
+                                        <span> <img src={`https://www.countryflags.io/${eachCase.flag}/shiny/32.png`} />&nbsp;</span> <span>  <h5 className='caseState colorPrimary d-inline-block'>{eachCase.Country}</h5></span>
+                                    </FadeIn>
+                                </div>
+                            </div>
+                        ))
+
+
+                        :
+                        <div className='text-center w-100'>
+                            <LoadingAnimation />
                         </div>
-                    </div>
-                ))
-
-
-                :
-                <div className='text-center w-100'>
-                    <LoadingAnimation />
-                </div>
             }
 
             <style jsx>{`
