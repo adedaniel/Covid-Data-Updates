@@ -3,7 +3,8 @@ import { colors } from "./styles/styles";
 import Axios from 'axios'
 import FadeIn from 'react-fade-in';
 import { URL } from './url'
-import { NotFoundIcon, OfflineIcon } from "./imageComponents/Images";
+import { NotFoundIcon } from "./imageComponents/Images";
+import ErrorMessage from "./ErrorMessage";
 export default function FAQS() {
   const [questionText, setQuestionText] = useState('');
   const [answers, setAnswers] = useState([]);
@@ -101,9 +102,7 @@ export default function FAQS() {
         }
         {
           isLoading === false && hasError === true && answers.length === 0 ?
-            <>
-              <h4 className="text-center">No internet connection. Check your connection and try again</h4>
-            </>
+            <ErrorMessage />
             : ""
         }
         <h1>

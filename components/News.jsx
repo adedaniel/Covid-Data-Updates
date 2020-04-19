@@ -3,6 +3,7 @@ import { colors } from './styles/styles'
 import MyContext from "./Context";
 import FadeIn from 'react-fade-in';
 import LoadingAnimation from './LoadingAnimation';
+import ErrorMessage from './ErrorMessage';
 
 export default function News() {
     const { news, localNews } = useContext(MyContext);
@@ -14,9 +15,14 @@ export default function News() {
     // console.log(indexOfFirstPost, indexOfLastPost);
     let indexOfLastLocalPost = localPage * 10;
     let indexOfFirstLocalPost = indexOfLastLocalPost - 10;
+    let localPostsToDisplay;
+    let internationalPostsToDisplay;
+    if (!(localNews instanceof Error) && !(news instanceof Error)) {
 
-    let localPostsToDisplay = localNews.slice(indexOfFirstLocalPost, indexOfLastLocalPost)
-    let internationalPostsToDisplay = news.slice(indexOfFirstPost, indexOfLastPost)
+        localPostsToDisplay = localNews.slice(indexOfFirstLocalPost, indexOfLastLocalPost)
+        internationalPostsToDisplay = news.slice(indexOfFirstPost, indexOfLastPost)
+
+    }
     // console.log(internationalPostsToDisplay);
     return (
         <>
@@ -33,41 +39,44 @@ export default function News() {
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active" id="nav-local" role="tabpanel" aria-labelledby="nav-local-tab">
                         {
-                            localNews.length !== 0 ?
-                                localPostsToDisplay.map((eachNews, index) => (
-                                    <FadeIn key={index}>
-                                        <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
-                                            <div className="bg-white newsCard my-3">
+                            localNews instanceof Error ?
+                                <ErrorMessage />
+                                :
+                                localNews.length !== 0 ?
+                                    localPostsToDisplay.map((eachNews, index) => (
+                                        <FadeIn key={index}>
+                                            <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
+                                                <div className="bg-white newsCard my-3">
 
-                                                <div className="row">
-                                                    <div className="col-sm-2 respPadding">
-                                                        <div className=" borderRadius bgImage" style={{ backgroundImage: `url(${eachNews.image})`, backgroundSize: "cover" }}>
+                                                    <div className="row">
+                                                        <div className="col-sm-2 respPadding">
+                                                            <div className=" borderRadius bgImage" style={{ backgroundImage: `url(${eachNews.image})`, backgroundSize: "cover" }}>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-sm-10 summary py-3">
+                                                            <h4 className='m-0'>{eachNews.title}</h4>
+                                                            <small className='m-0 textGrey'>{eachNews.published}</small>
+                                                            <h6>
+                                                                {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
+                                                                <span className='newsLink text-decoration-none'>Read More</span>
+                                                            </h6>
+
                                                         </div>
                                                     </div>
-                                                    <div className="col-sm-10 summary py-3">
-                                                        <h4 className='m-0'>{eachNews.title}</h4>
-                                                        <small className='m-0 textGrey'>{eachNews.published}</small>
-                                                        <h6>
-                                                            {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
-                                                            <span className='newsLink text-decoration-none'>Read More</span>
-                                                        </h6>
 
-                                                    </div>
                                                 </div>
-
-                                            </div>
-                                        </a>
-                                    </FadeIn>
-                                ))
-                                :
-                                // <div className='text-center w-100 mt-4'>
-                                //     <div className="spinner-grow colorPrimary  text-center" role="status">
-                                //         <span className="sr-only">Loading...</span>
-                                //     </div>
-                                // </div>
-                                <div className="vh-100">
-                                    <LoadingAnimation />
-                                </div>
+                                            </a>
+                                        </FadeIn>
+                                    ))
+                                    :
+                                    // <div className='text-center w-100 mt-4'>
+                                    //     <div className="spinner-grow colorPrimary  text-center" role="status">
+                                    //         <span className="sr-only">Loading...</span>
+                                    //     </div>
+                                    // </div>
+                                    <div className="vh-100">
+                                        <LoadingAnimation />
+                                    </div>
                         }
 
                         <div className="col-md-12 mt-5">
@@ -116,26 +125,29 @@ export default function News() {
                     </div>
                     <div className="tab-pane fade" id="nav-international" role="tabpanel" aria-labelledby="nav-international-tab">
                         {
-                            news.length !== 0 ?
+                            news instanceof Error ?
+                                <ErrorMessage />
+                                :
+                                news.length !== 0 ?
 
-                                internationalPostsToDisplay.map((eachNews, index) => (
-                                    <FadeIn key={index}>
-                                        <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
-                                            <div className="bg-white newsCard py-3 px-4 my-3">
-                                                <h4 className='m-0'>{eachNews.title}</h4>
-                                                <small className='m-0 textGrey'>{eachNews.published}</small>
-                                                <h6>
-                                                    {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
-                                                    <span className='newsLink text-decoration-none'>Read More</span>
-                                                </h6>
+                                    internationalPostsToDisplay.map((eachNews, index) => (
+                                        <FadeIn key={index}>
+                                            <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
+                                                <div className="bg-white newsCard py-3 px-4 my-3">
+                                                    <h4 className='m-0'>{eachNews.title}</h4>
+                                                    <small className='m-0 textGrey'>{eachNews.published}</small>
+                                                    <h6>
+                                                        {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
+                                                        <span className='newsLink text-decoration-none'>Read More</span>
+                                                    </h6>
 
-                                            </div>
-                                        </a>
-                                    </FadeIn>
-                                ))
-                                : <div className="vh-100">
-                                    <LoadingAnimation />
-                                </div>
+                                                </div>
+                                            </a>
+                                        </FadeIn>
+                                    ))
+                                    : <div className="vh-100">
+                                        <LoadingAnimation />
+                                    </div>
                         }
                         <div className="col-md-12 mt-5">
 
