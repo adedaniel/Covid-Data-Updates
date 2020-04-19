@@ -4,6 +4,7 @@ import Link from "next/link"
 import MyContext from "../Context";
 import FadeIn from 'react-fade-in';
 import LoadingAnimation from '../LoadingAnimation';
+import ErrorMessage from '../ErrorMessage';
 export default function FixedNews() {
   const { news } = useContext(MyContext);
   // const [news, setNews] = useState([])
@@ -26,26 +27,29 @@ export default function FixedNews() {
       </h4>
       <div className='vh90'>
         {
-          news.length !== 0 ?
-            news.slice(0, 5).map((eachNews) => (
-              <FadeIn key={eachNews.title}>
-                <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
-                  <div className="bg-white newsCard py-2 px-2 my-2">
-                    <h5 className='m-0'>{eachNews.title}</h5>
-                    <small className='m-0 textGrey'>{eachNews.published}</small>
-                    <h6>
-                      {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
-
-                      <span className='newsLink text-decoration-none'>Read More</span>
-                    </h6>
-
-                  </div>
-                </a>
-              </FadeIn>
-            ))
+          news instanceof Error ?
+            <ErrorMessage />
             :
+            news.length !== 0 ?
+              news.slice(0, 5).map((eachNews) => (
+                <FadeIn key={eachNews.title}>
+                  <a target='_blank' rel="noopener noreferrer" href={eachNews.link} className='text-dark text-decoration-none'>
+                    <div className="bg-white newsCard py-2 px-2 my-2">
+                      <h5 className='m-0'>{eachNews.title}</h5>
+                      <small className='m-0 textGrey'>{eachNews.published}</small>
+                      <h6>
+                        {eachNews.summary.replace(/^(.{75}[^\s]*).*/, "$1")}...{' '}
 
-            <LoadingAnimation />
+                        <span className='newsLink text-decoration-none'>Read More</span>
+                      </h6>
+
+                    </div>
+                  </a>
+                </FadeIn>
+              ))
+              :
+
+              <LoadingAnimation />
 
         }
       </div>

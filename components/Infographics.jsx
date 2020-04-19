@@ -5,14 +5,17 @@ import MyContext from "./Context";
 import { CountriesIcon, FineIcon, GoneIcon, ConfirmedIcon } from "./imageComponents/Images";
 import FadeIn from 'react-fade-in';
 import LoadingAnimation from './LoadingAnimation';
+import ErrorMessage from './ErrorMessage';
 
 export default function Infographics() {
     const [country, setCountry] = useState('Nigeria')
+    const [sortAscending, setSortAscending] = useState(true)
+    const [sortValue, setsortValue] = useState('Country')
     const { timeSeries, summary, all } = useContext(MyContext);
     let nationalStates = [['Days', 'Confirmed', 'Deaths', 'Recovered']];
     let countriesNames;
 
-    if (Object.entries(timeSeries).length !== 0) {
+    if (Object.entries(timeSeries).length !== 0 && !(timeSeries instanceof Error)) {
 
         countriesNames = Object.keys(timeSeries);
 
@@ -32,207 +35,254 @@ export default function Infographics() {
 
         // console.log(nationalStates);
     }
+    // let summaryToDisplay = [...summary]
+    function compareValues(key, order = 'asc') {
+        return function innerSort(a, b) {
+            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                // property doesn't exist on either object
+                return 0;
+            }
 
+            const varA = (typeof a[key] === 'string')
+                ? a[key].toUpperCase() : a[key];
+            const varB = (typeof b[key] === 'string')
+                ? b[key].toUpperCase() : b[key];
 
+            let comparison = 0;
+            if (varA > varB) {
+                comparison = 1;
+            } else if (varA < varB) {
+                comparison = -1;
+            }
+            return (
+                (order === 'desc') ? (comparison * -1) : comparison
+            );
+        };
+    }
+
+    const sortSummary = (value) => {
+
+        setsortValue(value);
+        setSortAscending(!sortAscending)
+
+    }
+    // console.log([...summary].sort(compareValues('Country', 'desc')));
     return (
         <div>
             <div className='container pt-3 mb-5'>
                 <h1 className='mb-4'>
                     <span className="hoverEffect">Infographics</span>
                 </h1>
-
-                <span> <h4 className='m-0 d-inline-block'>Showing Weekly Stats for &nbsp;&nbsp;</h4>
-                    <span>
-                        <select name="selectCountry" onChange={e => setCountry(e.target.value)} value={country} id="selectCountry" className='countrySelect'>
-                            {countriesNames ? countriesNames.map((eachCountry, index) => (
-                                <option className='countryOption' key={index} value={eachCountry.Country}> {eachCountry}</option>
-
-                            )) : ""}
-
-
-                        </select>
-
-
-
-                    </span>
-                </span>
-                <div className="scroll">
-                    {Object.entries(timeSeries).length !== 0 ?
+                {
+                    summary instanceof Error ?
+                        <ErrorMessage />
+                        :
                         <>
-                            <Chart
-                                width={'1000px'}
-                                height={'500px'}
-                                chartType="LineChart"
-                                loader={
-                                    <div className='text-center'>
-                                        <LoadingAnimation />
-                                    </div>
-                                }
-                                data={nationalStates
-                                }
-                                options={{
-                                    hAxis: {
-                                        title: 'Dates',
-                                        textStyle: {
-                                            color: colors.primary,
-                                            fontName: 'Jaldi',
-                                            fontSize: '20'
-                                        }
-                                    },
-                                    titleTextStyle: {
-                                        color: colors.primary,    // any HTML string color ('red', '#cc00cc')
-                                        fontName: 'Jaldi',
-                                        fontSize: '20', // 12, 18 whatever you want (don't specify px)
+                            <span> <h4 className='m-0 d-inline-block'>Showing Weekly Stats for &nbsp;&nbsp;</h4>
+                                <span>
+                                    <select name="selectCountry" onChange={e => setCountry(e.target.value)} value={country} id="selectCountry" className='countrySelect'>
+                                        {countriesNames ? countriesNames.map((eachCountry, index) => (
+                                            <option className='countryOption' key={index} value={eachCountry.Country}> {eachCountry}</option>
 
-                                    },
-                                    pointSize: 7,
-                                    animation: {
-                                        startup: true,
-                                        easing: 'linear',
-                                        duration: 500,
-                                    },
-                                    vAxis: {
-                                        title: 'Cases',
-                                        textStyle: {
-                                            color: colors.primary,
-                                            fontName: 'Jaldi',
-                                            fontSize: '20'
-                                        }
-                                    },
-                                    curveType: 'function',
-                                    colors: ['#b3aa0e', '#e2371d', '#14a52a']
-                                }}
-                                rootProps={{ 'data-testid': '2' }}
-                            />
-                        </>
-                        : ""}
-                </div>
-                <div className="infoWrapper">
-                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the chart to view the rest of the information</small>
-                </div>
-                <div className="container my-5">
-                    <div className="row">
+                                        )) : ""}
 
-                        {Object.entries(all).length !== 0 ?
-                            <>
-                                <div className="col-md-3 mb-3">
-                                    <div className="allCards">
-                                        <FadeIn>
-                                            <CountriesIcon width="60%" />
-                                            <h3 className='caseNumber colorPrimary m-0'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
 
-                                            <h3 className='m-0'>Countries</h3>
-                                            <h5 className='m-0'>Affected</h5>
-                                        </FadeIn>
-                                    </div>
+                                    </select>
+
+
+
+                                </span>
+                            </span>
+                            <div className="scroll">
+                                {Object.entries(timeSeries).length !== 0 ?
+                                    <>
+                                        <Chart
+                                            width={'1000px'}
+                                            height={'500px'}
+                                            chartType="LineChart"
+                                            loader={
+                                                <div className='text-center'>
+                                                    <LoadingAnimation />
+                                                </div>
+                                            }
+                                            data={nationalStates
+                                            }
+                                            options={{
+                                                hAxis: {
+                                                    title: 'Dates',
+                                                    textStyle: {
+                                                        color: colors.primary,
+                                                        fontName: 'Jaldi',
+                                                        fontSize: '20'
+                                                    }
+                                                },
+                                                titleTextStyle: {
+                                                    color: colors.primary,    // any HTML string color ('red', '#cc00cc')
+                                                    fontName: 'Jaldi',
+                                                    fontSize: '20', // 12, 18 whatever you want (don't specify px)
+
+                                                },
+                                                pointSize: 7,
+                                                animation: {
+                                                    startup: true,
+                                                    easing: 'linear',
+                                                    duration: 500,
+                                                },
+                                                vAxis: {
+                                                    title: 'Cases',
+                                                    textStyle: {
+                                                        color: colors.primary,
+                                                        fontName: 'Jaldi',
+                                                        fontSize: '20'
+                                                    }
+                                                },
+                                                curveType: 'function',
+                                                colors: ['#b3aa0e', '#e2371d', '#14a52a']
+                                            }}
+                                            rootProps={{ 'data-testid': '2' }}
+                                        />
+                                    </>
+                                    : ""}
+                            </div>
+                            <div className='container'>
+                                <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can <span className="infoWrapper"> scroll horizontally through the chart to view the rest of the information or </span>touch any of the dots to check stats for each day</small>
+                            </div>
+                            <div className="container my-5">
+                                <div className="row">
+
+                                    {Object.entries(all).length !== 0 ?
+                                        <>
+                                            <div className="col-md-3 mb-3">
+                                                <div className="allCards">
+                                                    <FadeIn>
+                                                        <CountriesIcon width="60%" />
+                                                        <h3 className='caseNumber colorPrimary m-0'>{all.affectedCountries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                                        <h3 className='m-0'>Countries</h3>
+                                                        <h5 className='m-0'>Affected</h5>
+                                                    </FadeIn>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3 mb-3">
+                                                <div className="allCards">
+                                                    <FadeIn>
+                                                        <ConfirmedIcon width="60%" />
+                                                        <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                                        <h3 className='m-0'>Active</h3>
+                                                        <h5 className='m-0'>Cases</h5>
+                                                    </FadeIn>
+                                                </div>
+
+                                            </div>
+                                            <div className="col-md-3 mb-3">
+                                                <div className="allCards">
+                                                    <FadeIn>
+                                                        <FineIcon width="60%" />
+                                                        <h3 className='caseNumber colorPrimary m-0'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                                        <h3 className='m-0'>Recovered</h3>
+                                                        <h5 className='m-0'>Cases</h5>
+                                                    </FadeIn>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3 mb-3">
+                                                <div className="allCards">
+                                                    <FadeIn>
+                                                        <GoneIcon width="60%" />
+                                                        <h3 className='caseNumber colorPrimary m-0'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+
+                                                        <h3 className='m-0'>Death</h3>
+                                                        <h5 className='m-0'>Cases</h5>
+                                                    </FadeIn>
+                                                </div>
+                                            </div>
+                                        </>
+                                        : <div className='text-center w-100 mt-4'>
+                                            <LoadingAnimation />
+                                        </div>
+
+
+
+                                    }
+
+
                                 </div>
-                                <div className="col-md-3 mb-3">
-                                    <div className="allCards">
-                                        <FadeIn>
-                                            <ConfirmedIcon width="60%" />
-                                            <h3 className='caseNumber colorPrimary m-0'>{all.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
-
-                                            <h3 className='m-0'>Active</h3>
-                                            <h5 className='m-0'>Cases</h5>
-                                        </FadeIn>
-                                    </div>
-
-                                </div>
-                                <div className="col-md-3 mb-3">
-                                    <div className="allCards">
-                                        <FadeIn>
-                                            <FineIcon width="60%" />
-                                            <h3 className='caseNumber colorPrimary m-0'>{all.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
-
-                                            <h3 className='m-0'>Recovered</h3>
-                                            <h5 className='m-0'>Cases</h5>
-                                        </FadeIn>
-                                    </div>
-                                </div>
-                                <div className="col-md-3 mb-3">
-                                    <div className="allCards">
-                                        <FadeIn>
-                                            <GoneIcon width="60%" />
-                                            <h3 className='caseNumber colorPrimary m-0'>{all.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
-
-                                            <h3 className='m-0'>Death</h3>
-                                            <h5 className='m-0'>Cases</h5>
-                                        </FadeIn>
-                                    </div>
-                                </div>
-                            </>
-                            : <div className='text-center w-100 mt-4'>
-                                <LoadingAnimation />
                             </div>
 
 
+                            <h1 className="colorPrimary mb-4 mt-5">World Stats</h1>
 
-                        }
+                            <div className="tableContainer ">
 
-
-                    </div>
-                </div>
-
-
-                <h1 className="colorPrimary mb-4 mt-5">World Stats</h1>
-
-                <div className="tableContainer ">
-
-                    <table className="fixed_headers table-hover searchable sortable">
-                        <thead className="thead-light tHead">
-                            <tr>
-                                <th className='countries padd' scope="col">Country</th>
-                                <th className='text-center newConfirmed' scope="col">New Confirmed</th>
-                                <th className='text-center newConfirmed' scope="col">New Recovered</th>
-                                <th className='text-center newConfirmed' scope="col">New Deaths</th>
-                                <th className='text-center newConfirmed' scope="col">Total Confirmed</th>
-                                <th className='text-center newConfirmed' scope="col">Total Recovered</th>
-                                <th className='text-center newConfirmed' scope="col">Total Deaths</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                summary.length !== 0 ?
-                                    summary.map((eachCountry, index) => (
-                                        <tr key={index}>
-                                            <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
-                                            <td className='text-center newConfirmed'> {eachCountry.NewConfirmed}</td>
-                                            <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
-                                            <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
-                                            <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
-                                            <td className='text-center newConfirmed'>{eachCountry.TotalRecovered}</td>
-                                            <td className='text-center newConfirmed'>{eachCountry.TotalDeaths}</td>
-
+                                <table className="fixed_headers table-hover searchable sortable">
+                                    <thead className="thead-light tHead">
+                                        <tr>
+                                            <th className='countries padd' scope="col" onClick={() => sortSummary('Country')}>Country &nbsp; <i className={`fa fa-angle-${sortValue === 'Country' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('NewConfirmed')}>New Confirmed &nbsp; <i className={`fa fa-angle-${sortValue === 'NewConfirmed' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('NewRecovered')}>New Recovered &nbsp; <i className={`fa fa-angle-${sortValue === 'NewRecovered' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center w174' scope="col" onClick={() => sortSummary('NewDeaths')}>New Deaths &nbsp; <i className={`fa fa-angle-${sortValue === 'NewDeaths' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center newConfirmed' scope="col" onClick={() => sortSummary('TotalConfirmed')}>Total Confirmed &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalConfirmed' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center w202' scope="col" onClick={() => sortSummary('TotalRecovered')}>Total Recovered &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalRecovered' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
+                                            <th className='text-center w174' scope="col" onClick={() => sortSummary('TotalDeaths')}>Total Deaths &nbsp; <i className={`fa fa-angle-${sortValue === 'TotalDeaths' ? sortAscending ? "up" : "down" : ""} `} aria-hidden="true"></i></th>
                                         </tr>
-                                    ))
-                                    :
-                                    <div className='text-center w-100 mt-4'>
-                                        <LoadingAnimation />
-                                    </div>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            summary.length !== 0 ?
+                                                [...summary].sort(compareValues(sortValue, sortAscending ? 'asc' : 'desc')).map((eachCountry, index) => (
+                                                    <tr key={index}>
+                                                        <td className=' countries'><img src={`https://www.countryflags.io/${eachCountry.flag}/flat/16.png`} /> &nbsp;{eachCountry.Country}</td>
+                                                        <td className=' new'> {eachCountry.NewConfirmed}</td>
+                                                        <td className='text-center newConfirmed'>{eachCountry.NewRecovered}</td>
+                                                        <td className='text-center newConfirmed'>{eachCountry.NewDeaths}</td>
+                                                        <td className='text-center newConfirmed'>{eachCountry.TotalConfirmed}</td>
+                                                        <td className='text-center newConfirmed'>{eachCountry.TotalRecovered}</td>
+                                                        <td className='text-center newConfirmed'>{eachCountry.TotalDeaths}</td>
 
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div className="infoWrapper">
+                                                    </tr>
+                                                ))
+                                                :
+                                                <div className='text-center w-100 mt-4'>
+                                                    <LoadingAnimation />
+                                                </div>
 
-                    <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the table to view the rest of the fields. </small>
-                </div>
-                <div className="">
-                    <small className='infoText'>
-                        All figures here are gotten from
-                        the Johns Hopkins Coronavirus Resource Center.
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="infoWrapper">
+
+                                <i className="fa infoIcon colorPrimary fa-info-circle" aria-hidden="true"></i> <small className='infoText'>You can scroll horizontally through the table to view the rest of the fields. </small>
+                            </div>
+                            <div className="">
+                                <small className='infoText'>
+                                    All figures here are gotten from
+                                    the Johns Hopkins Coronavirus Resource Center.
 </small>
-                </div>
-
+                            </div>
+                        </>
+                }
             </div>
 
             <style jsx>
                 {`
+             
+                .w174{
+                    width: 174px !important
+                }
+                .w202{
+                    width: 202px !important
+                }
                 @media(min-width: 992px){
                     .infoWrapper{
-display: none
+                        display: none
                     }
+                    .fixed_headers th{
+                        padding: 15px 16px !important;
+                    
+                      }
+                      
                 }
                 .infoText{
                     font-size: 54%
@@ -272,7 +322,7 @@ display: none
 
 .fixed_headers th{
     padding: 15px 17px;
-
+cursor: pointer;
 width: 180px   
   }
 .fixed_headers td {
@@ -304,7 +354,7 @@ width: 180px
 
 
 .tableContainer{
-    height: 600px;
+    height: 630px;
     overflow: auto
 }
 table {
@@ -319,6 +369,9 @@ table {
                  .scroll{
                      overflow-x: scroll
                  }
+                 .new{
+                    text-align: left !important
+                }
              }
                   select {
                    

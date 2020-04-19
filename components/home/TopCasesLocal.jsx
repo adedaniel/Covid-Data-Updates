@@ -3,6 +3,7 @@ import { colors } from '../styles/styles'
 import MyContext from "../Context";
 import FadeIn from "react-fade-in";
 import LoadingAnimation from '../LoadingAnimation';
+import ErrorMessage from '../ErrorMessage';
 
 
 export default function TopCasesLocal() {
@@ -10,29 +11,30 @@ export default function TopCasesLocal() {
   // console.log(ncdc);
   // const cases = [];
   // if (ncdc.length !== 0) {
-  //   console.log(ncdc);
-  //   // var list = ncdc.Numbers;
-  //   // // console.log(list);
-  //   // // Reverse sorting on key
-  //   // const keysSorted = Object.values(list).sort(function (a, b) { return b - a })
-  //   // // console.log(keysSorted);
+  // console.log(ncdc);
+  // var list = ncdc.Numbers;
+  // // console.log(list);
+  // // Reverse sorting on key
+  // const keysSorted = Object.values(list).sort(function (a, b) { return b - a })
+  // // console.log(keysSorted);
 
 
-  //   // // Adding the sorted result to an array of object
-  //   // for (let i = 0; i < keysSorted.length; i++) {
-  //   //   const obj = {};
-  //   //   obj.val = keysSorted[i];
-  //   //   obj.id = Object.keys(list)[Object.values(list).indexOf(keysSorted[i])];
-  //   //   cases.push(obj);
-  //   // }
+  // // Adding the sorted result to an array of object
+  // for (let i = 0; i < keysSorted.length; i++) {
+  //   const obj = {};
+  //   obj.val = keysSorted[i];
+  //   obj.id = Object.keys(list)[Object.values(list).indexOf(keysSorted[i])];
+  //   cases.push(obj);
+  // }
 
   //   // console.log(cases);
   //   // setCasesArray(cases)
   // }
-
   return (
     <>
-      {
+      {ncdc instanceof Error ?
+        <ErrorMessage />
+        :
         ncdc.length !== 0 ?
           ncdc.slice(0, 6).map((eachCase, index) => (
             <div key={index} className="col-sm-2">

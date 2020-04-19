@@ -57,11 +57,12 @@ export const LogoIcon = ({ width }) => {
 export const OfflineIcon = ({ width, margin }) => {
     return (
         <>
-            <img src="/images/offline.png?trace" alt="logo" width={width} />
+            <img src="/images/offline.png?trace" alt="logo" />
             <style jsx>{`
 
             img{
-                margin : ${margin || 'unset'}
+                margin : ${margin || 'unset'};
+                width: ${width || '100px'};
             }
             `}</style>
         </>
